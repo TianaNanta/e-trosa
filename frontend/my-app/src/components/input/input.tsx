@@ -6,14 +6,15 @@ interface IInput {
     id: string,
     label: string,
     type: string,
+    value: string,
+    setValue: (value : string) => void,
 }
 
-const Input: React.FC<IInput> = ({ id, label, type }) => {
+const Input: React.FC<IInput> = ({ id, label, type, value, setValue }) => {
 
-    const [text, setText] = useState('');
 
     const handleChange = (event: any) => {
-        setText(event.target.value);
+        setValue(event.target.value);
       };
 
     return (
@@ -22,7 +23,7 @@ const Input: React.FC<IInput> = ({ id, label, type }) => {
                 id={id}
                 label={label}
                 type={type}
-                value={text}
+                value={value}
                 onChange={handleChange}
             />
         </BoxStyled>
