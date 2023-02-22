@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Box, Container, Grid } from '@mui/material';
 
 export const AppBackground = styled.div`
-    // background-color : #e4e4e4
+    background-color: ${props => props.theme.themode.color1}
 `
 
 export const CenterBox = styled(Box)`

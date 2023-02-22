@@ -5,6 +5,6 @@ import { IButton } from './button';
 
 export const BoxStyled = styled(Box)<IButton>`
     display: flex;
-    background-color: ${(props) => props.color};
+    background-color: ${props => props.theme.themode.color4};
     padding: 10px;
 `
