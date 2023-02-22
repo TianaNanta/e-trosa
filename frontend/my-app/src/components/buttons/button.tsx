@@ -2,16 +2,17 @@ import React from "react";
 import { BoxStyled } from "./button.style";
 import { Button } from "@mui/material";
 
-interface IButton{
-    text: string,
+export interface IButton{
+    text?: string,
+    color?: string,
     onClick?: () => void,
 
 }
 
-const StyledButton: React.FC<IButton> = ({ text, onClick }) => {
+const StyledButton: React.FC<IButton> = ({ text, color, onClick}) => {
 
     return (
-        <BoxStyled>
+        <BoxStyled color={color}>
             <Button onClick={onClick}>
             {text}
             </Button>
