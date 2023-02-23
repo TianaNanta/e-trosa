@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     These parameters can be configured
     with environment variables.
     """
+    
+    SECRET_KEY = "secret"
+    ALGORITHM = "HS256"
 
     host: str = "127.0.0.1"
     port: int = 8000
