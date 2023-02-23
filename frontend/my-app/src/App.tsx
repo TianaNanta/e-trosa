@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Input from './components/input/input';
 import StyledButton from './components/buttons/button';
-import { AppBackground, CenterBox, BorderBox } from './App.styled';
+import { CenterBox, BorderBox, RowBox, ColumnBox } from './App.styled';
 import { ThemeProvider } from 'styled-components';
 import theme from './core/theme/index';
 import DarkTheme  from './core/theme/theme2';
@@ -30,14 +30,16 @@ function App() {
           <h2>I Love Me</h2>
         </CenterBox>
         <CenterBox>
-          <BorderBox>
-            <Input id={'name'} type={'text'} label={'Nom'} value={name} setValue={setName} />
-            <Input id={'password'} type={'password'} label={'Mot de passe'} value={password} setValue={setPassword} />
-          </BorderBox>
-          <StyledButton text={'send'} />
+            <BorderBox>
+              <Input id={'name'} type={'text'} label={'Nom'} value={name} setValue={setName} />
+            </BorderBox>
+            <BorderBox>
+              <Input id={'password'} type={'password'} label={'Mot de passe'} value={password} setValue={setPassword} />
+            </BorderBox>
             <Space size={1} />
-          <StyledButton text={'reset'} onClick={handleReset}/>
-            <Space size={1} />
+              <StyledButton text={'send'} />
+              <Space size={1} />
+              <StyledButton text={'reset'} onClick={handleReset}/>
         </CenterBox>
       </ThemeProvider>
     </>
