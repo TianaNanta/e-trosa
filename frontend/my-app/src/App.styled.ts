@@ -33,19 +33,22 @@ export const CenterBox = styled(Box)`
         flex-direction: row;
     }
 
-    
 `
 export const BorderBox = styled(Box)`
     border-style : solid;
-    border-width : 1;
+    border-width : 0;
     border-color: #eaecf0;
 `
-export const RowBox = styled(Box)`
-    display: flex;
-    flex-direction: row;
+
+export const BorderBoxRadius = styled(BorderBox)`
+    border-radius: 10px;
 `
 
-export const ColumnBox = styled(Box)`
-    display: flex;
-    flex-direction: column;
+export const CenterBoxButton = styled(CenterBox)`
+    margin-top: ${props => props.theme.size(1) * 2}px;
+
+    @media ${device.Tablet} {
+        margin-top: ${props => props.theme.size(1) * 2}px;
+        margin-bottom: ${props => props.theme.size(1) * 2}px;
+    }
 `
