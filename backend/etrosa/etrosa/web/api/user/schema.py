@@ -11,8 +11,7 @@ class UserCreate(UserBase):
     password: Optional[str]
     
 class UserShow(UserBase):
-    avatar: Optional[bytes]
-    is_active: bool
+    disabled: bool
     id: int
 
 class UserAvatar(BaseModel):

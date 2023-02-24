@@ -1,7 +1,7 @@
 from typing import List
 from datetime import timedelta
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, File, HTTPException, status, UploadFile
 from fastapi.security import OAuth2PasswordRequestForm
 
 from etrosa.db.dao.user_dao import UserDAO
@@ -12,7 +12,7 @@ from etrosa.services.user_auth import authenticate_user, create_access_token, ge
 
 router = APIRouter()
 
-@router.get("/", response_model=List[UserShow])
+@router.get("", response_model=List[UserShow])
 async def get_users(
     limit: int = 10,
     offset: int = 0,
@@ -75,8 +75,8 @@ async def login_for_access_token(
     
 @router.get("/me", response_model=UserShow)
 async def get_current_user(
-    user: User = Depends(get_current_user),
-) -> User:
+    user: UserShow = Depends(get_current_user),
+):
     """
     Get current user.
 
@@ -84,3 +84,34 @@ async def get_current_user(
     :return: user.
     """
     return user
+
+# PUT method to update user avatar
+@router.put("/avatar")
+async def update_avatar(
+    avatar: UploadFile = File(...),
+    user: User = Depends(get_current_user),
+    user_dao: UserDAO = Depends(),
+):
+    """
+    Update avatar of a user.
+
+    :param avatar: avatar of a user.
+    :param user: user.
+    :param user_dao: DAO for users.
+    :return: user.
+    """
+    await user_dao.update_avatar(user_id=user.id, avatar=avatar.file.read())
+    
+# DELETE method to delete authenticated user
+@router.delete("/me")
+async def delete_user(
+    user: User = Depends(get_current_user),
+    user_dao: UserDAO = Depends(),
+):
+    """
+    Delete authenticated user
+    
+    :param user: User.
+    :param user_dao: DAO for users.
+    """
+    await user_dao.delete_user(user_id=user.id)

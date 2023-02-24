@@ -63,3 +63,12 @@ class UserDAO:
         """
         await User.filter(id=user_id).update(avatar=avatar)
     
+    # function to delete user model
+    async def delete_user(self, user_id: int) -> None:
+        """
+        Delete user.
+        
+        :param user_id: id of a user.
+        """
+        await User.filter(id=user_id).delete()
+    

@@ -81,6 +81,6 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     :param current_user: current user.
     :return: user.
     """
-    if not current_user.is_active:
+    if not current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
