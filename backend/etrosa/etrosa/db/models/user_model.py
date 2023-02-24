@@ -5,9 +5,8 @@ class User(models.Model):
     """ Model for user """
     
     id = fields.IntField(pk=True)
-    name = fields.CharField(max_length=200)
-    first_name = fields.CharField(max_length=200)
-    email = fields.CharField(max_length=200)
+    name = fields.CharField(max_length=200, unique=True)
+    email = fields.CharField(max_length=200, unique=True)
     hashed_password = fields.CharField(max_length=200, null=True)
     avatar = fields.BinaryField(max_length=200, null=True)
     is_active = fields.BooleanField(default=False)
@@ -19,6 +18,6 @@ class User(models.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'first_name': self.first_name,
+            'email': self.email,
             'avatar': self.avatar,
         }

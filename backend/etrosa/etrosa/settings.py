@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     
     SECRET_KEY = "secret"
     ALGORITHM = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
     host: str = "127.0.0.1"
     port: int = 8000

@@ -27,15 +27,15 @@ class UserDAO:
         """
         return pwd_context.verify(plain_password, hashed_password)
     
-    async def create_user_model(self, name: str, first_name: str, email: str, hashed_password: Optional[str]) -> None:
+    async def create_user_model(self, name: str, email: str, hashed_password: Optional[str]) -> None:
         """
         Add single dummy to session.
         
         :param name: name of a dummy.
         """
-        await User.create(name=name, first_name=first_name, email=email, hashed_password=hashed_password)
+        await User.create(name=name, email=email, hashed_password=hashed_password)
         
-    async def get_all_user(self, limit: int, offset: int) -> List[User]:
+    async def get_all_users(self, limit: int, offset: int) -> List[User]:
         """
         Get all dummy models with limit/offset pagination.
         

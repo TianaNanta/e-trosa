@@ -5,7 +5,6 @@ from pydantic import BaseModel, EmailStr
 
 class UserBase(BaseModel):
     name: str
-    first_name: str
     email: EmailStr
 
 class UserCreate(UserBase):
@@ -14,6 +13,7 @@ class UserCreate(UserBase):
 class UserShow(UserBase):
     avatar: Optional[bytes]
     is_active: bool
+    id: int
 
 class UserAvatar(BaseModel):
     avatar: Optional[bytes]
@@ -23,4 +23,4 @@ class Token(BaseModel):
     token_type: str
     
 class TokenData(BaseModel):
-    email: Optional[str] = None
+    email: Optional[EmailStr]

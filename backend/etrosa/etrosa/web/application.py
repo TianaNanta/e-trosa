@@ -20,8 +20,8 @@ def get_app() -> FastAPI:
     app = FastAPI(
         title="etrosa",
         version=metadata.version("etrosa"),
-        docs_url="/api/docs",
-        redoc_url="/api/redoc",
+        docs_url="/",
+        redoc_url="/api",
         openapi_url="/api/openapi.json",
         default_response_class=UJSONResponse,
     )
