@@ -2,7 +2,7 @@ from typing import List
 
 from etrosa.settings import settings
 
-MODELS_MODULES: List[str] = ["etrosa.db.models.dummy_model", "etrosa.db.models.user_model"]  # noqa: WPS407
+MODELS_MODULES: List[str] = ["etrosa.db.models.user_model"]  # noqa: WPS407
 
 TORTOISE_CONFIG = {  # noqa: WPS407
     "connections": {

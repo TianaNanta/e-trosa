@@ -1,7 +1,7 @@
 from tortoise import fields, models
 
 
-class Users(models.Model):
+class User(models.Model):
     """ Model for user """
     
     id = fields.IntField(pk=True)
