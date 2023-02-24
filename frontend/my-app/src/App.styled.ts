@@ -3,7 +3,9 @@ import { Box, Container, Grid } from '@mui/material';
 import { device } from './display/screensize';
 
 export const AppBackground = styled.div`
-    background-color: ${props => props.theme.themode.color1}
+    background-image: url(${props => props.theme.img});
+    background-repeat: no-repeat;
+    background-size: cover;
 `
 
 export const CenterBox = styled(Box)`
@@ -24,20 +26,18 @@ export const CenterBox = styled(Box)`
         flex-direction: column;
     }
     @media ${device.Laptop} {
-        flex-direction: row;
+        flex-direction: column;
     }
     @media ${device.LaptopL} {
-        flex-direction: row;
+        flex-direction: column;
     }
     @media ${device.Desktop} {
-        flex-direction: row;
+        flex-direction: column;
     }
 
 `
 export const BorderBox = styled(Box)`
-    border-style : solid;
-    border-width : 0;
-    border-color: #eaecf0;
+
 `
 
 export const BorderBoxRadius = styled(BorderBox)`

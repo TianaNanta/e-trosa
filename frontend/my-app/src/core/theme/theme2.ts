@@ -1,5 +1,6 @@
 import { invertedTheme } from "styled-components";
 import "@fontsource/roboto";
+import darkmode from "../../assets/images/darkmode.jpg";
 
 export const DarkTheme : invertedTheme = {
     size: (value: number, sizeMultiplicator = 4) => {
@@ -16,7 +17,8 @@ export const DarkTheme : invertedTheme = {
         color2: '#3F8182',
         color3: '#999999',
         color4: '#F2F2F2',
-    }
+    },
+    img: darkmode,
 
 }
 

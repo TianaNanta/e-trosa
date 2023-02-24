@@ -17,6 +17,7 @@ declare module 'styled-components' {
             body: string
         }
         themode: ThemeMode 
+        img: any
     }
     
     export interface invertedTheme{
@@ -26,5 +27,6 @@ declare module 'styled-components' {
             body: string
         }
         themode: ThemeMode
+        img: any
     }
 }

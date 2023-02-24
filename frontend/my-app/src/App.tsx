@@ -10,10 +10,10 @@ import Space from './components/space/space';
 
 function App() {
 
-  const [name , setName] = useState('');
-  const [password , setPassword] = useState('');
+  const [name , setName] = useState<string>('');
+  const [password , setPassword] = useState<string>('');
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const themeswitch = (isDarkMode ? DarkTheme : theme);
 
@@ -25,6 +25,8 @@ function App() {
     setName('');
     setPassword('');
   }
+
+  const imga = theme.img;
 
   return (
     <>
