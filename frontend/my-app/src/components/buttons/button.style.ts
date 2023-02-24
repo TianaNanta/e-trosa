@@ -1,10 +1,7 @@
 import styled from 'styled-components';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { IButton } from './button';
 
-const StyledButton = styled(Button)<IButton>`
-
-`
 
 export const BoxStyled = styled(Box)<IButton>`
     display: flex;
@@ -12,12 +9,15 @@ export const BoxStyled = styled(Box)<IButton>`
     justify-content: center;
     align-items: center;
     width: ${props => props.theme.size(2) * 26}px;
-    /* padding: 0px ${props => props.theme.size(1) * 2}px; */
+    padding: 0px ${props => props.theme.size(1) * 2}px;
 
     
     & .MuiButton-root {
-        color: #ffffff;
-        background-color: ${props => props.theme.themode.color2};
+        color: ${props => props.theme.themode.color4};
+        background-color: ${props => props.theme.themode.color3};
         width: 100%;
+            &:hover {
+            background-color: ${props => props.theme.themode.color4};
+        }
     }
 `

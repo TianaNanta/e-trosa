@@ -44,7 +44,7 @@ export const BorderBoxRadius = styled(BorderBox)`
     border-radius: 10px;
 `
 
-export const CenterBoxButton = styled(CenterBox)`
+export const CenterBoxWithMargin = styled(CenterBox)`
     margin-top: ${props => props.theme.size(1) * 2}px;
 
     @media ${device.Tablet} {

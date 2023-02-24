@@ -1,6 +1,6 @@
 import React from "react";
 import { BoxStyled } from "./input.style";
-import { TextField } from "@mui/material";
+import { InputBase } from "@mui/material";
 
 interface IInput {
     id: string,
@@ -12,16 +12,16 @@ interface IInput {
 
 const Input: React.FC<IInput> = ({ id, label, type, value, setValue }) => {
 
-
     const handleChange = (event: any) => {
         setValue(event.target.value);
       };
 
     return (
         <BoxStyled>
-            <TextField 
+            <InputBase
+                fullWidth
                 id={id}
-                label={label}
+                placeholder={label}
                 type={type}
                 value={value}
                 onChange={handleChange}
