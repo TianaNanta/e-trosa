@@ -15,6 +15,7 @@ export const BoxStyled = styled(Box)<IButton>`
     & .MuiButton-root {
         color: ${props => props.theme.themode.primary};
         background-color: ${props => props.theme.themode.onPrimary};
+        border-radius: 20px;
         width: 100%;
             &:hover {
             /* background-color: ${props => props.theme.themode.primary}; */

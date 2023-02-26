@@ -7,6 +7,7 @@ export const AppBackground = styled.div`
     /* background-repeat: no-repeat; */
     /* background-size: cover; */
     background-color: ${props => props.theme.themode.background};
+    height: 100vh;
 `
 
 export const CenterBox = styled(Box)`

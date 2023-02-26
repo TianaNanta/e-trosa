@@ -7,6 +7,7 @@ import theme from './core/theme/index';
 import DarkTheme  from './core/theme/theme2';
 import GlobalStyle from './core/theme/global';
 import Space from './components/space/space';
+import Header from './pages/header/header';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={themeswitch} >
+        <Header mode={handleThemeToggle}/>
         <AppBackground>
           <GlobalStyle />
           <CenterBox>
@@ -39,7 +41,7 @@ function App() {
               <BorderBox>
                 <Input id={'name'} type={'text'} label={'Nom'} value={name} setValue={setName} />
               </BorderBox>
-                <Space size={1} height={1} />
+                <Space size={1} height={4} />
               <BorderBox>
                 <Input id={'password'} type={'password'} label={'Mot de passe'} value={password} setValue={setPassword} />
               </BorderBox>
