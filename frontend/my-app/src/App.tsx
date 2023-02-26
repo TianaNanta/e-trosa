@@ -25,9 +25,7 @@ function App() {
   function handleReset() {
     setName('');
     setPassword('');
-  }
-
-  console.log(theme.themode.background)  
+  } 
 
   return (
     <>
@@ -35,7 +33,6 @@ function App() {
         <AppBackground>
           <GlobalStyle />
           <CenterBox>
-            <h2>I Love Me</h2>
             <StyledButton text={'dark or light'} onClick={handleThemeToggle} />
           </CenterBox>
           <CenterBox>
