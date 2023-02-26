@@ -13,11 +13,11 @@ export const BoxStyled = styled(Box)<IButton>`
 
     
     & .MuiButton-root {
-        color: ${props => props.theme.themode.color4};
-        background-color: ${props => props.theme.themode.color3};
+        color: ${props => props.theme.themode.primary};
+        background-color: ${props => props.theme.themode.onPrimary};
         width: 100%;
             &:hover {
-            background-color: ${props => props.theme.themode.color4};
+            /* background-color: ${props => props.theme.themode.primary}; */
         }
     }
 `

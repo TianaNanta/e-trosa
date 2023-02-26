@@ -3,9 +3,10 @@ import { Box, Container, Grid } from '@mui/material';
 import { device } from './display/screensize';
 
 export const AppBackground = styled.div`
-    background-image: url(${props => props.theme.img});
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* background-image: url(${props => props.theme.img}); */
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
+    background-color: ${props => props.theme.themode.background};
 `
 
 export const CenterBox = styled(Box)`
