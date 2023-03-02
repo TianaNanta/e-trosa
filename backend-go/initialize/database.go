@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/TianaNanta/e-trosa/backend-go/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -30,6 +31,8 @@ func ConnectDB() {
 	db.Logger = logger.Default.LogMode(logger.Info)
 	log.Println("Running migrations")
 
-	// TODO: Run migrations
+	// Run migrations
+	db.AutoMigrate(&models.User{}, &models.Trosa{})
+
 	Database = DbInstance{Db: db}
 }
