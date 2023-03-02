@@ -2,9 +2,16 @@ package main
 
 import (
 	"log"
+	"os"
 
+	"github.com/TianaNanta/e-trosa/backend-go/initialize"
 	"github.com/gofiber/fiber/v2"
 )
+
+func init() {
+	initialize.LoadEnvVariables()
+	initialize.ConnectDB()
+}
 
 func main() {
 	app := fiber.New(fiber.Config{
@@ -29,5 +36,5 @@ func main() {
 		return c.SendString("Trosa")
 	})
 
-	log.Fatal(app.Listen(":8000"))
+	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
 }
