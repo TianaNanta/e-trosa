@@ -6,6 +6,7 @@ import (
 	"github.com/TianaNanta/e-trosa/backend-go/initialize"
 	"github.com/TianaNanta/e-trosa/backend-go/models"
 	"github.com/gofiber/fiber/v2"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type User struct {
@@ -47,4 +48,30 @@ func GetUser(c *fiber.Ctx) error {
 	responseUser := CreateResponseUser(user)
 
 	return c.JSON(responseUser)
+}
+
+// sign up
+func SignUp(c *fiber.Ctx) error {
+	var user models.User
+
+	if err := c.BodyParser(&user); err != nil {
+		return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+			"message": "Invalid request",
+		})
+	}
+
+	// hash password
+	hashedPassword, er := bcrypt.GenerateFromPassword([]byte(user.PasswordHash), 10)
+	if er != nil {
+		return c.Status(http.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Error hashing password",
+		})
+	}
+	user.PasswordHash = string(hashedPassword)
+
+	// create user
+	initialize.Database.Db.Create(&user)
+	responseUser := CreateResponseUser(user)
+
+	return c.Status(http.StatusCreated).JSON(responseUser)
 }

@@ -31,6 +31,8 @@ func main() {
 	user.Get("/", controllers.GetAllUsers)
 	user.Get("/:id", controllers.GetUser)
 
+	user.Post("/", controllers.SignUp)
+
 	// Trosa routes
 	trosa.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Trosa")
