@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/TianaNanta/e-trosa/backend-go/controllers"
 	"github.com/TianaNanta/e-trosa/backend-go/initialize"
 	"github.com/gofiber/fiber/v2"
 )
@@ -18,9 +19,7 @@ func main() {
 		CaseSensitive: true,
 		AppName:       "Trosa",
 	})
-	api := app.Group("/api", func(c *fiber.Ctx) error {
-		return c.SendString("Welcome to the API")
-	})
+	api := app.Group("/api")
 	user := api.Group("/users")
 	trosa := api.Group("/trosa")
 
@@ -28,10 +27,11 @@ func main() {
 		return c.SendString("Hello, World!")
 	})
 
-	user.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("User")
-	})
+	// User routes
+	user.Get("/", controllers.GetAllUsers)
+	user.Get("/:id", controllers.GetUser)
 
+	// Trosa routes
 	trosa.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Trosa")
 	})
