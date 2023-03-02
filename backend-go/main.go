@@ -1,24 +1,17 @@
 package main
 
 import (
-	"net/http"
+	"log"
 
-	"github.com/TianaNanta/e-trosa/backend-go/initialize"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
-func init() {
-	// Load .env file
-	initialize.LoadEnvVariables()
-	initialize.ConnectToDB()
-}
-
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
+	app := fiber.New()
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+
+	log.Fatal(app.Listen(":3000"))
 }
