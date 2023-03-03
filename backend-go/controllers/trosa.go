@@ -165,7 +165,7 @@ func DeleteTrosa(c *fiber.Ctx) error {
 // if the user is the owner, he can update the trosa amount
 func UpdateTrosaAmount(c *fiber.Ctx) error {
 	type TrosaAmount struct {
-		Amount int `json:"amount"`
+		AmountPaid int `json:"amount_paid"`
 	}
 	var trosaAmount TrosaAmount
 	if err := c.BodyParser(&trosaAmount); err != nil {
@@ -195,7 +195,7 @@ func UpdateTrosaAmount(c *fiber.Ctx) error {
 	}
 
 	// update trosa amount
-	database.Database.Db.Model(&trosa).Update("amount", trosaAmount.Amount)
+	database.Database.Db.Model(&trosa).Update("amount", trosa.Amount-trosaAmount.AmountPaid)
 
 	return c.JSON(fiber.Map{
 		"status":  "success",
