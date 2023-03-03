@@ -236,3 +236,51 @@ func GetTrosaOfTheUserID(c *fiber.Ctx) error {
 
 	return c.JSON(t.Amount)
 }
+
+// calculate the amount
+func Money(c *fiber.Ctx) error {
+	// get trosa by user id
+	var trosa []models.Trosa
+	id, err := GetUserID(c)
+	if err != nil {
+		return err
+	}
+	database.Database.Db.Where("owner_id = ?", id).Find(&trosa)
+
+	// get total amount
+	var t models.Trosa
+	t.Amount = 0
+
+	for _, v := range trosa {
+		t.Amount += v.Amount
+	}
+
+	// get trosa by user id
+	var trosa2 []models.Trosa
+	database.Database.Db.Where("in_dept_id = ?", id).Find(&trosa2)
+
+	// get total amount
+	var t2 models.Trosa
+	t2.Amount = 0
+
+	for _, v := range trosa2 {
+		t2.Amount += v.Amount
+	}
+
+	// if t.Amount > t2.Amount, return my money is t.Amount - t2.Amount
+	if t.Amount >= t2.Amount {
+		amount := t.Amount - t2.Amount
+		return c.JSON(fiber.Map{
+			"status":  "success",
+			"message": "My money",
+			"data":    amount,
+		})
+	} else {
+		amount := t2.Amount - t.Amount
+		return c.JSON(fiber.Map{
+			"status":  "success",
+			"message": "My dept",
+			"data":    amount,
+		})
+	}
+}
