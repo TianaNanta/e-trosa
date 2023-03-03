@@ -127,3 +127,37 @@ func GetDept(c *fiber.Ctx) error {
 
 	return c.JSON(t.Amount)
 }
+
+// if the user is the owner, he can delete the trosa
+func DeleteTrosa(c *fiber.Ctx) error {
+	// get trosa by id
+	var trosa models.Trosa
+	id, err := GetUserID(c)
+	if err != nil {
+		return err
+	}
+	database.Database.Db.Where("id = ?", c.Params("id")).Find(&trosa)
+
+	// check if the trosa exist
+	if trosa.ID == 0 {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Trosa not found",
+		})
+	}
+
+	// check if the user is the owner
+	if trosa.OwnerID != id {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized",
+		})
+	}
+
+	// delete trosa
+	database.Database.Db.Delete(&trosa)
+
+	return c.JSON(fiber.Map{
+		"status":  "success",
+		"message": "Trosa deleted",
+		"data":    trosa,
+	})
+}
