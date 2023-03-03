@@ -32,15 +32,16 @@ func SetupRoutes(app *fiber.App) {
 		return c.SendString("Trosa")
 	})
 	trosa.Get("/money", controllers.Money)
-	trosa.Get("/mymoney", controllers.GetMoney)
-	trosa.Get("/mydept", controllers.GetDept)
-	trosa.Get("/mydept/:id", controllers.GetTrosaOfTheUserID)
-	trosa.Get("/history/mymoney", controllers.GetTrosaOwner)
-	trosa.Get("/history/mydept", controllers.GetTrosaInDept)
+	trosa.Get("/money/:id<int>", controllers.GetMoneyFromUserID)
+	trosa.Get("/me/money", controllers.GetMoney)
+	trosa.Get("/me/dept", controllers.GetDept)
+	trosa.Get("/me/dept/:user_id<int>", controllers.GetTrosaOfTheUserID)
+	trosa.Get("/history/money", controllers.GetTrosaOwner)
+	trosa.Get("/history/dept", controllers.GetTrosaInDept)
 
 	trosa.Post("/add", controllers.AddTrosa)
 
-	trosa.Patch("/update/:id", controllers.UpdateTrosaAmount)
+	trosa.Patch("/update/:id<int>", controllers.UpdateTrosaAmount)
 
-	trosa.Delete("/delete/:id", controllers.DeleteTrosa)
+	trosa.Delete("/delete/:id<int>", controllers.DeleteTrosa)
 }

@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"strconv"
+
 	"github.com/TianaNanta/e-trosa/backend-go/database"
 	"github.com/TianaNanta/e-trosa/backend-go/models"
 	"github.com/gofiber/fiber/v2"
@@ -213,7 +215,7 @@ func GetTrosaOfTheUserID(c *fiber.Ctx) error {
 		return err
 	}
 	// in_dept_id is the user_id
-	user_id := c.Params("id")
+	user_id := c.Params("user_id")
 
 	// check if the user exist
 	var user models.User
@@ -277,6 +279,93 @@ func Money(c *fiber.Ctx) error {
 		})
 	} else {
 		amount := t2.Amount - t.Amount
+		return c.JSON(fiber.Map{
+			"status":  "success",
+			"message": "My dept",
+			"data":    amount,
+		})
+	}
+}
+
+// calculate the rest of the amount for the connected user_owner
+func GetMoneyFromUserID(c *fiber.Ctx) error {
+	// database
+	db := database.Database.Db
+
+	// get trosa by user id
+	var trosa []models.Trosa
+	id, err := GetUserID(c)
+	if err != nil {
+		return err
+	}
+
+	// in_dept_id is the user_id
+	user_id := c.Params("id")
+
+	// convert user_id to int
+	indept_id, err := strconv.Atoi(user_id)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": "Error converting user_id to int",
+		})
+	}
+
+	db.Where("owner_id = ? AND in_dept_id = ?", id, indept_id).Find(&trosa)
+
+	// get total amount
+	var t models.Trosa
+	t.Amount = 0
+
+	for _, v := range trosa {
+		t.Amount += v.Amount
+	}
+
+	// get trosa by user id
+	var trosa2 []models.Trosa
+	db.Where("in_dept_id = ? AND owner_id = ?", id, indept_id).Find(&trosa2)
+
+	// get total amount
+	var t2 models.Trosa
+	t2.Amount = 0
+
+	for _, v := range trosa2 {
+		t2.Amount += v.Amount
+	}
+
+	// if t.Amount > t2.Amount, return my money is t.Amount - t2.Amount
+	if t.Amount >= t2.Amount {
+		amount := t.Amount - t2.Amount
+
+		// delete all trosa for the user_id
+		db.Where("owner_id = ? AND in_dept_id = ?", id, indept_id).Delete(&models.Trosa{})
+
+		// add amount to the owner_id for the in_dept_id
+		trosa := models.Trosa{
+			Amount:   amount,
+			OwnerID:  id,
+			InDeptID: indept_id,
+		}
+		db.Create(&trosa)
+
+		return c.JSON(fiber.Map{
+			"status":  "success",
+			"message": "My money",
+			"data":    amount,
+		})
+	} else {
+		amount := t2.Amount - t.Amount
+
+		// delete all trosa for the user_id
+		db.Where("in_dept_id = ? AND owner_id = ?", id, indept_id).Delete(&models.Trosa{})
+
+		// add amount to the owner_id for the in_dept_id
+		trosa := models.Trosa{
+			Amount:   amount,
+			OwnerID:  indept_id,
+			InDeptID: id,
+		}
+		db.Create(&trosa)
+
 		return c.JSON(fiber.Map{
 			"status":  "success",
 			"message": "My dept",
