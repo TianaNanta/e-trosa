@@ -38,6 +38,8 @@ func SetupRoutes(app *fiber.App) {
 
 	trosa.Post("/add", controllers.AddTrosa)
 
+	trosa.Delete("/delete/:id", controllers.DeleteTrosa)
+
 	// Protected routes
 	// trosa.Use(middleware.Protected())
 	// trosa.Get("/me", controllers.Me)
