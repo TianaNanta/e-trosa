@@ -6,9 +6,8 @@ import (
 
 type Trosa struct {
 	gorm.Model
-	Amount     int    `json:"amount"`
-	Note       string `json:"note"`
-	OwnerRefer int    `json:"user_id"`
-	Owner      User   `json:"owner" gorm:"foreignKey:OwnerRefer"`
-	InDept     int    `json:"in_dept"`
+	Amount   int    `json:"amount"`
+	OwnerID  int    `json:"owner_id" gorm:"not null; index; references:ID"`
+	InDeptID int    `json:"in_dept_id" gorm:"not null; index; references:ID"`
+	Note     string `json:"note"`
 }

@@ -2,16 +2,16 @@ package main
 
 import (
 	"log"
-	"os"
 
-	"github.com/TianaNanta/e-trosa/backend-go/controllers"
-	"github.com/TianaNanta/e-trosa/backend-go/initialize"
+	"github.com/TianaNanta/e-trosa/backend-go/config"
+	"github.com/TianaNanta/e-trosa/backend-go/database"
+	"github.com/TianaNanta/e-trosa/backend-go/router"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func init() {
-	initialize.LoadEnvVariables()
-	initialize.ConnectDB()
+	database.ConnectDB()
 }
 
 func main() {
@@ -19,24 +19,9 @@ func main() {
 		CaseSensitive: true,
 		AppName:       "Trosa",
 	})
-	api := app.Group("/api")
-	user := api.Group("/users")
-	trosa := api.Group("/trosa")
+	app.Use(cors.New())
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	router.SetupRoutes(app)
 
-	// User routes
-	user.Get("/", controllers.GetAllUsers)
-	user.Get("/:id", controllers.GetUser)
-
-	user.Post("/", controllers.SignUp)
-
-	// Trosa routes
-	trosa.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Trosa")
-	})
-
-	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
+	log.Fatal(app.Listen(":" + config.Config("PORT")))
 }
