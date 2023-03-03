@@ -31,7 +31,7 @@ func SetupRoutes(app *fiber.App) {
 	trosa.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Trosa")
 	})
-	trosa.Get("/money", controllers.GetMoney)
+	trosa.Get("/money", controllers.Money)
 	trosa.Get("/mymoney", controllers.GetMoney)
 	trosa.Get("/mydept", controllers.GetDept)
 	trosa.Get("/mydept/:id", controllers.GetTrosaOfTheUserID)
