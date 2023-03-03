@@ -161,3 +161,45 @@ func DeleteTrosa(c *fiber.Ctx) error {
 		"data":    trosa,
 	})
 }
+
+// if the user is the owner, he can update the trosa amount
+func UpdateTrosaAmount(c *fiber.Ctx) error {
+	type TrosaAmount struct {
+		Amount int `json:"amount"`
+	}
+	var trosaAmount TrosaAmount
+	if err := c.BodyParser(&trosaAmount); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "Review your input", "data": err})
+	}
+
+	// get trosa by id
+	var trosa models.Trosa
+	id, err := GetUserID(c)
+	if err != nil {
+		return err
+	}
+	database.Database.Db.Where("id = ?", c.Params("id")).Find(&trosa)
+
+	// check if the trosa exist
+	if trosa.ID == 0 {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Trosa not found",
+		})
+	}
+
+	// check if the user is the owner
+	if trosa.OwnerID != id {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"message": "Unauthorized",
+		})
+	}
+
+	// update trosa amount
+	database.Database.Db.Model(&trosa).Update("amount", trosaAmount.Amount)
+
+	return c.JSON(fiber.Map{
+		"status":  "success",
+		"message": "Trosa updated",
+		"data":    trosa,
+	})
+}
