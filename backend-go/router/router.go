@@ -33,6 +33,7 @@ func SetupRoutes(app *fiber.App) {
 	})
 	trosa.Get("/mymoney", controllers.GetMoney)
 	trosa.Get("/mydept", controllers.GetDept)
+	trosa.Get("/mydept/:id", controllers.GetTrosaOfTheUserID)
 	trosa.Get("/history/mymoney", controllers.GetTrosaOwner)
 	trosa.Get("/history/mydept", controllers.GetTrosaInDept)
 

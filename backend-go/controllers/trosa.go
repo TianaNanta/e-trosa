@@ -203,3 +203,36 @@ func UpdateTrosaAmount(c *fiber.Ctx) error {
 		"data":    trosa,
 	})
 }
+
+// get all given user_id trosa for the connected user_owner
+func GetTrosaOfTheUserID(c *fiber.Ctx) error {
+	// get trosa by user id
+	var trosa []models.Trosa
+	id, err := GetUserID(c)
+	if err != nil {
+		return err
+	}
+	// in_dept_id is the user_id
+	user_id := c.Params("id")
+
+	// check if the user exist
+	var user models.User
+	database.Database.Db.Where("id = ?", user_id).Find(&user)
+	if user.ID == 0 {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "User not found",
+		})
+	}
+
+	database.Database.Db.Where("owner_id = ? AND in_dept_id = ?", id, user_id).Find(&trosa)
+
+	// get total amount
+	var t models.Trosa
+	t.Amount = 0
+
+	for _, v := range trosa {
+		t.Amount += v.Amount
+	}
+
+	return c.JSON(t.Amount)
+}
