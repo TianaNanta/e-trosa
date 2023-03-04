@@ -28,9 +28,6 @@ func SetupRoutes(app *fiber.App) {
 	user.Delete("/me/delete", controllers.DeleteUser)
 
 	// Trosa routes
-	trosa.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Trosa")
-	})
 	trosa.Get("/money", controllers.Money)
 	trosa.Get("/money/:id<int>", controllers.GetMoneyFromUserID)
 	trosa.Get("/me/money", controllers.GetMoney)
