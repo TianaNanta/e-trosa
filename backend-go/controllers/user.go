@@ -5,7 +5,6 @@ import (
 	"github.com/TianaNanta/e-trosa/backend-go/models"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -28,16 +27,6 @@ func CreateResponseUser(user models.User) User {
 func hashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
-}
-
-// valid token
-func validToken(t *jwt.Token, id int) bool {
-	n := id
-
-	claims := t.Claims.(jwt.MapClaims)
-	uid := int(claims["user_id"].(float64))
-
-	return uid == n
 }
 
 // valid user
@@ -186,4 +175,11 @@ func DeleteUser(c *fiber.Ctx) error {
 	db.Delete(&user)
 
 	return c.JSON(fiber.Map{"status": "success", "message": "User successfully deleted", "data": nil})
+}
+
+// get username by id
+func GetUsernameByID(id int) string {
+	var user models.User
+	database.Database.Db.Find(&user, id)
+	return user.Username
 }

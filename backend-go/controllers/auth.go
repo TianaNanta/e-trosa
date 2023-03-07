@@ -65,3 +65,11 @@ func GetUserID(c *fiber.Ctx) int {
 	id, _ := strconv.Atoi(user_id)
 	return id
 }
+
+// get username from token
+func GetUserName(c *fiber.Ctx) string {
+	token := c.Locals("user").(*jwt.Token)
+	claims := token.Claims.(jwt.MapClaims)
+	username := fmt.Sprintf("%v", claims["username"])
+	return username
+}
