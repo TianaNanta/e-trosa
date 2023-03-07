@@ -12,10 +12,8 @@ import (
 func GetTrosaOwner(c *fiber.Ctx) error {
 	// get trosa by user id
 	var trosa []models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	database.Database.Db.Where("owner_id = ?", id).Find(&trosa)
 	return c.JSON(trosa)
 }
@@ -24,10 +22,8 @@ func GetTrosaOwner(c *fiber.Ctx) error {
 func GetTrosaInDept(c *fiber.Ctx) error {
 	// get trosa by user id
 	var trosa []models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	database.Database.Db.Where("in_dept_id = ?", id).Find(&trosa)
 	return c.JSON(trosa)
 }
@@ -43,13 +39,8 @@ func AddTrosa(c *fiber.Ctx) error {
 	// database
 	db := database.Database.Db
 
-	// get user id from cookie
-	id, er := GetUserID(c)
-	if er != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-			"message": "Unauthorized",
-		})
-	}
+	// get user id from token
+	id := GetUserID(c)
 
 	// set owner refer
 	trosa.OwnerID = id
@@ -92,10 +83,8 @@ func AddTrosa(c *fiber.Ctx) error {
 func GetMoney(c *fiber.Ctx) error {
 	// get trosa by user id
 	var trosa []models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	database.Database.Db.Where("owner_id = ?", id).Find(&trosa)
 
 	// get total amount
@@ -113,10 +102,8 @@ func GetMoney(c *fiber.Ctx) error {
 func GetDept(c *fiber.Ctx) error {
 	// get trosa by user id
 	var trosa []models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	database.Database.Db.Where("in_dept_id = ?", id).Find(&trosa)
 
 	// get total amount
@@ -134,10 +121,8 @@ func GetDept(c *fiber.Ctx) error {
 func DeleteTrosa(c *fiber.Ctx) error {
 	// get trosa by id
 	var trosa models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	database.Database.Db.Where("id = ?", c.Params("id")).Find(&trosa)
 
 	// check if the trosa exist
@@ -176,10 +161,8 @@ func UpdateTrosaAmount(c *fiber.Ctx) error {
 
 	// get trosa by id
 	var trosa models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	database.Database.Db.Where("id = ?", c.Params("id")).Find(&trosa)
 
 	// check if the trosa exist
@@ -210,10 +193,8 @@ func UpdateTrosaAmount(c *fiber.Ctx) error {
 func GetTrosaOfTheUserID(c *fiber.Ctx) error {
 	// get trosa by user id
 	var trosa []models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	// in_dept_id is the user_id
 	user_id := c.Params("user_id")
 
@@ -243,10 +224,8 @@ func GetTrosaOfTheUserID(c *fiber.Ctx) error {
 func Money(c *fiber.Ctx) error {
 	// get trosa by user id
 	var trosa []models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
+
 	database.Database.Db.Where("owner_id = ?", id).Find(&trosa)
 
 	// get total amount
@@ -294,10 +273,7 @@ func GetMoneyFromUserID(c *fiber.Ctx) error {
 
 	// get trosa by user id
 	var trosa []models.Trosa
-	id, err := GetUserID(c)
-	if err != nil {
-		return err
-	}
+	id := GetUserID(c)
 
 	// in_dept_id is the user_id
 	user_id := c.Params("id")
