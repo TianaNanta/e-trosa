@@ -4,8 +4,8 @@
 This is the backend of the application Trosa developped to be an exercise.
 
 # Route
-![route](route.png)
 
+![route](route.png)
 
 ## API Reference
 
@@ -16,6 +16,7 @@ This is the backend of the application Trosa developped to be an exercise.
 ```http
   POST /api/users/login
 ```
+
 ```json
 {
     "identity": "nanta", # username or email
@@ -28,6 +29,7 @@ This is the backend of the application Trosa developped to be an exercise.
 ```http
   POST /api/users/signup
 ```
+
 ```json
 {
     "username": "nanta",
@@ -65,6 +67,7 @@ This is the backend of the application Trosa developped to be an exercise.
 ```http
   PATCH /api/users/update
 ```
+
 ```json
 {
     "old_password": "",
@@ -88,6 +91,7 @@ This is the backend of the application Trosa developped to be an exercise.
 | `id`      | `int` | **Required**. The id of the user |
 
 #### Delete user
+
  ```http
    DELETE /api/users/me/delete
  ```
@@ -101,7 +105,9 @@ This is the backend of the application Trosa developped to be an exercise.
 ### Trosa (all operation here requires authenticated user)
 
 #### List all Trosa
+
 Return all money of the authenticated user
+
 ```http
   GET /api/trosa/me/money
 ```
@@ -112,7 +118,6 @@ Return all money of the authenticated user
   GET /api/trosa/me/dept
 ```
 
-
 #### Get money of the user (check if he/she is in dept or not)
 
 ```http
@@ -120,9 +125,11 @@ Return all money of the authenticated user
 ```
 
 #### Add new Trosa
+
 ```http
   POST /api/trosa/add
 ```
+
 ```json
 {
     "amount": 5000
