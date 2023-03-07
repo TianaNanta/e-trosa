@@ -8,6 +8,6 @@ type User struct {
 	Email     string    `json:"email" gorm:"uniqueIndex"`
 	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"created_at"`
-	TrosaOwn  []Trosa   `json:"trosa_own" gorm:"foreignKey:OwnerID"`
-	TrosaDept []Trosa   `json:"trosa_dept" gorm:"foreignKey:InDeptID"`
+	TrosaOwn  []Trosa   `json:"trosa_own" gorm:"foreignKey:Owner"`
+	TrosaDept []Trosa   `json:"trosa_dept" gorm:"foreignKey:InDept"`
 }
