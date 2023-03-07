@@ -25,20 +25,29 @@ func CheckPasswordHash(password string, hash string) bool {
 // LoginUser route logins a user in the app
 func Login(c *fiber.Ctx) error {
 	// input
-	identity := c.FormValue("identity")
-	password := c.FormValue("password")
+	// identity := c.FormValue("identity")
+	// password := c.FormValue("password")
+	type inputLogin struct {
+		Identity string `json:"identity"`
+		Password string `json:"password"`
+	}
+	var input inputLogin
 
-	// check if a user exists
-	u := new(models.User)
-	if res := database.Database.Db.Where(
-		&models.User{Email: identity}).Or(
-		&models.User{Username: identity},
-	).First(&u); res.RowsAffected <= 0 {
+	// check if identity is email or username
+	if err := c.BodyParser(&input); err != nil {
 		return c.JSON(fiber.Map{"error": true, "general": "Invalid Credentials."})
 	}
 
+	// find user
+	var u models.User
+	if err := database.Database.Db.Where("username = ?", input.Identity).First(&u).Error; err != nil {
+		if err := database.Database.Db.Where("email = ?", input.Identity).First(&u).Error; err != nil {
+			return c.JSON(fiber.Map{"error": true, "general": "Invalid Credentials."})
+		}
+	}
+
 	// Check if password is correct
-	if !CheckPasswordHash(password, u.Password) {
+	if !CheckPasswordHash(input.Password, u.Password) {
 		return c.JSON(fiber.Map{"error": true, "general": "Invalid Credentials."})
 	}
 
