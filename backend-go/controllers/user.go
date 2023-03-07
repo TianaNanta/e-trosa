@@ -1,6 +1,11 @@
 package controllers
 
 import (
+	"crypto/rand"
+	"fmt"
+	"os"
+	"strings"
+
 	"github.com/TianaNanta/e-trosa/backend-go/database"
 	"github.com/TianaNanta/e-trosa/backend-go/models"
 
@@ -87,6 +92,7 @@ func SignUp(c *fiber.Ctx) error {
 	type NewUser struct {
 		Username string `json:"username"`
 		Email    string `json:"email"`
+		Avatar   string `json:"avatar"`
 	}
 
 	db := database.Database.Db
@@ -101,6 +107,25 @@ func SignUp(c *fiber.Ctx) error {
 
 	}
 
+	// add avatar
+	user.Avatar = "https://ui-avatars.com/api/?name=" + user.Username + "&background=random"
+	avatar, _ := c.FormFile("avatar")
+	if avatar != nil {
+		// random filename generation with rand
+		randBytes := make([]byte, 3)
+		rand.Read(randBytes)
+		fileName := fmt.Sprintf("%x_%s", randBytes, avatar.Filename)
+		// check if the directory exists
+		if _, err := os.Stat("public/avatar"); os.IsNotExist(err) {
+			// if not, create it
+			os.MkdirAll("public/avatar", 0755)
+		}
+		// upload avatar
+		avatarPath := "public/avatar/" + fileName
+		c.SaveFile(avatar, avatarPath)
+		user.Avatar = avatarPath
+	}
+
 	user.Password = hash
 	if err := db.Create(&user).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "Couldn't create user", "data": err})
@@ -109,6 +134,7 @@ func SignUp(c *fiber.Ctx) error {
 	newUser := NewUser{
 		Username: user.Username,
 		Email:    user.Email,
+		Avatar:   user.Avatar,
 	}
 
 	return c.JSON(fiber.Map{"status": "success", "message": "Created user", "data": newUser})
@@ -143,6 +169,14 @@ func UpdateUser(c *fiber.Ctx) error {
 	if uui.NewPassword != uui.ConfirmPass {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "New password and confirm password not match", "data": nil})
 	}
+
+	// hash new password
+	hash, err := hashPassword(uui.NewPassword)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "Couldn't hash password", "data": err})
+	}
+
+	user.Password = hash
 
 	db.Save(&user)
 
@@ -182,4 +216,26 @@ func GetUsernameByID(id int) string {
 	var user models.User
 	database.Database.Db.Find(&user, id)
 	return user.Username
+}
+
+// get user avatar
+func GetUserAvatar(c *fiber.Ctx) error {
+	id := c.Params("id")
+	var user models.User
+	database.Database.Db.Find(&user, id)
+	avatar := user.Avatar
+
+	// check if avatar is default avatar
+	if strings.Contains(avatar, "ui-avatars.com") {
+		return c.Redirect(avatar)
+	}
+
+	// check if avatar is uploaded
+	if _, err := os.Stat(avatar); os.IsNotExist(err) {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"message": "Avatar not found",
+		})
+	}
+
+	return c.SendFile(avatar)
 }
