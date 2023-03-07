@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/TianaNanta/e-trosa/backend-go/config"
+	"github.com/TianaNanta/e-trosa/backend-go/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -29,6 +30,19 @@ func ConnectDB() {
 
 	log.Println("Connected to database")
 	db.Logger = logger.Default.LogMode(logger.Info)
+
+	// check if the database table exists
+	// if not, create it
+	log.Println("Checking database table")
+
+	if !db.Migrator().HasTable(&models.User{}) {
+		log.Println("Creating user table")
+		db.Migrator().CreateTable(&models.User{})
+	}
+	if !db.Migrator().HasTable(&models.Trosa{}) {
+		log.Println("Creating trosa table")
+		db.Migrator().CreateTable(&models.Trosa{})
+	}
 
 	Database = DbInstance{Db: db}
 }
