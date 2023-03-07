@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/TianaNanta/e-trosa/backend-go/controllers"
+	"github.com/TianaNanta/e-trosa/backend-go/middleware"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
@@ -17,15 +18,14 @@ func SetupRoutes(app *fiber.App) {
 	// User routes
 	user.Get("/", controllers.GetAllUsers)
 	user.Get("/:id<int>", controllers.GetUser)
-	user.Get("/me", controllers.GetMe)
+	user.Get("/me", middleware.Protected(), controllers.GetMe)
 
 	user.Post("/", controllers.SignUp)
 	user.Post("/login", controllers.Login)
-	user.Post("/logout", controllers.Logout)
 
-	user.Patch("/me/update", controllers.UpdateUser)
+	user.Patch("/me/update", middleware.Protected(), controllers.UpdateUser)
 
-	user.Delete("/me/delete", controllers.DeleteUser)
+	user.Delete("/me/delete", middleware.Protected(), controllers.DeleteUser)
 
 	// Trosa routes
 	trosa.Get("/money", controllers.Money)
