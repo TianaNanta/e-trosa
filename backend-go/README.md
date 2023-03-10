@@ -79,11 +79,10 @@ Go to <http://localhost:3000>
 
 ```json
 {
-    "username": "nanta",
-    "email": "nanta@example.com",
-    "password": "password",
-    "avatar": "avatar.png"
-
+  "username": "nanta",
+  "email": "nanta@example.com",
+  "password": "password",
+  "avatar": "avatar.png"
 }
 ```
 
@@ -99,8 +98,8 @@ Go to <http://localhost:3000>
   GET /api/users/:id
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                       |
+| :-------- | :---- | :-------------------------------- |
 | `id`      | `int` | **Required**. Id of user to fetch |
 
 #### Get current authenticated user
@@ -117,15 +116,15 @@ Go to <http://localhost:3000>
 
 ```json
 {
-    "old_password": "",
-    "new_password": "",
-    "confirm_pass": ""
+  "old_password": "",
+  "new_password": "",
+  "confirm_pass": ""
 }
 ```
 
-| Auth | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `jwt`      | `bearer` | **Required**. The user's token |
+| Auth  | Type     | Description                    |
+| :---- | :------- | :----------------------------- |
+| `jwt` | `bearer` | **Required**. The user's token |
 
 #### Get Avatar
 
@@ -133,21 +132,21 @@ Go to <http://localhost:3000>
   GET /api/users/:id/avatar
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                      |
+| :-------- | :---- | :------------------------------- |
 | `id`      | `int` | **Required**. The id of the user |
 
 #### Delete user
 
- ```http
-   DELETE /api/users/me/delete
- ```
+```http
+  DELETE /api/users/me/delete
+```
 
- ```json
- {
-     "password": ""     # Required
- }
- ```
+```json
+{
+    "password": ""     # Required
+}
+```
 
 ### Trosa (all operation here requires authenticated user)
 
@@ -179,6 +178,6 @@ Return all money of the authenticated user
 
 ```json
 {
-    "amount": 5000
+  "amount": 5000
 }
 ```
