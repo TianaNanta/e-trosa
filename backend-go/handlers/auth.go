@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"fmt"
@@ -40,8 +40,8 @@ func Login(c *fiber.Ctx) error {
 
 	// find user
 	var u models.User
-	if err := database.Database.Db.Where("username = ?", input.Identity).First(&u).Error; err != nil {
-		if err := database.Database.Db.Where("email = ?", input.Identity).First(&u).Error; err != nil {
+	if err := database.DB.Where("username = ?", input.Identity).First(&u).Error; err != nil {
+		if err := database.DB.Where("email = ?", input.Identity).First(&u).Error; err != nil {
 			return c.JSON(fiber.Map{"error": true, "general": "Invalid Credentials."})
 		}
 	}

@@ -17,11 +17,19 @@ func init() {
 func main() {
 	app := fiber.New(fiber.Config{
 		CaseSensitive: true,
-		AppName:       "Trosa",
+		AppName:       "E-Trosa",
+		BodyLimit:     1024 * 1024 * 50,
 	})
 	app.Use(cors.New())
+	app.Static("/", "./static/public")
 
 	router.SetupRoutes(app)
+
+	// 404 handler
+	app.Use(func(c *fiber.Ctx) error {
+		c.Status(fiber.StatusNotFound)
+		return c.SendFile("./static/private/404.html")
+	})
 
 	log.Fatal(app.Listen(":" + config.Config("PORT")))
 }
