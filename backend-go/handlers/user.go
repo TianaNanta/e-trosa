@@ -1,10 +1,9 @@
-package controllers
+package handlers
 
 import (
 	"crypto/rand"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/TianaNanta/e-trosa/backend-go/database"
 	"github.com/TianaNanta/e-trosa/backend-go/models"
@@ -17,6 +16,7 @@ type User struct {
 	ID       uint   `json:"id"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
+	Avatar   string `json:"avatar"`
 }
 
 // response user
@@ -25,6 +25,7 @@ func CreateResponseUser(user models.User) User {
 		ID:       user.ID,
 		Username: user.Username,
 		Email:    user.Email,
+		Avatar:   user.Avatar,
 	}
 }
 
@@ -37,7 +38,7 @@ func hashPassword(password string) (string, error) {
 // valid user
 func validUser(id int, password string) bool {
 	var user models.User
-	database.Database.Db.Find(&user, id)
+	database.DB.Find(&user, id)
 	if user.Username == "" {
 		return false
 	}
@@ -54,7 +55,7 @@ func GetMe(c *fiber.Ctx) error {
 
 	// get user by id
 	var user models.User
-	database.Database.Db.Find(&user, id)
+	database.DB.Find(&user, id)
 	responseUser := CreateResponseUser(user)
 
 	return c.JSON(responseUser)
@@ -64,7 +65,7 @@ func GetMe(c *fiber.Ctx) error {
 func GetUser(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var user models.User
-	err := database.Database.Db.Find(&user, id).Error
+	err := database.DB.Find(&user, id).Error
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"message": "User not found",
@@ -78,7 +79,7 @@ func GetUser(c *fiber.Ctx) error {
 // get all users
 func GetAllUsers(c *fiber.Ctx) error {
 	var users []models.User
-	database.Database.Db.Find(&users)
+	database.DB.Find(&users)
 	var responseUsers []User
 	for _, user := range users {
 		responseUsers = append(responseUsers, CreateResponseUser(user))
@@ -95,7 +96,7 @@ func SignUp(c *fiber.Ctx) error {
 		Avatar   string `json:"avatar"`
 	}
 
-	db := database.Database.Db
+	db := database.DB
 	user := new(models.User)
 	if err := c.BodyParser(user); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "Review your input", "data": err})
@@ -116,14 +117,15 @@ func SignUp(c *fiber.Ctx) error {
 		rand.Read(randBytes)
 		fileName := fmt.Sprintf("%x_%s", randBytes, avatar.Filename)
 		// check if the directory exists
-		if _, err := os.Stat("public/avatar"); os.IsNotExist(err) {
+		if _, err := os.Stat("static/public/avatars"); os.IsNotExist(err) {
 			// if not, create it
-			os.MkdirAll("public/avatar", 0755)
+			os.MkdirAll("static/public/avatars", 0755)
 		}
 		// upload avatar
-		avatarPath := "public/avatar/" + fileName
+		avatarPath := "static/public/avatars/" + fileName
 		c.SaveFile(avatar, avatarPath)
-		user.Avatar = avatarPath
+		link := fmt.Sprintf("/api/users/avatar/%s", fileName)
+		user.Avatar = link
 	}
 
 	user.Password = hash
@@ -155,7 +157,7 @@ func UpdateUser(c *fiber.Ctx) error {
 	// get user id from token
 	id := GetUserID(c)
 
-	db := database.Database.Db
+	db := database.DB
 	var user models.User
 
 	db.First(&user, id)
@@ -202,11 +204,20 @@ func DeleteUser(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "Invalid password", "data": nil})
 	}
 
-	db := database.Database.Db
+	db := database.DB
 	var user models.User
-
 	db.First(&user, id)
-	db.Delete(&user)
+
+	// check if trosa indept is null
+	var trosa models.Trosa
+	db.Where("in_dept = ?", user.Username).First(&trosa)
+	if trosa.Amount >= 0 {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "User still have trosa in dept", "data": nil})
+	} else if trosa.Amount < 0 {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"status": "error", "message": "User still have trosa to own", "data": nil})
+	} else {
+		db.Delete(&user)
+	}
 
 	return c.JSON(fiber.Map{"status": "success", "message": "User successfully deleted", "data": nil})
 }
@@ -214,28 +225,6 @@ func DeleteUser(c *fiber.Ctx) error {
 // get username by id
 func GetUsernameByID(id int) string {
 	var user models.User
-	database.Database.Db.Find(&user, id)
+	database.DB.Find(&user, id)
 	return user.Username
-}
-
-// get user avatar
-func GetUserAvatar(c *fiber.Ctx) error {
-	id := c.Params("id")
-	var user models.User
-	database.Database.Db.Find(&user, id)
-	avatar := user.Avatar
-
-	// check if avatar is default avatar
-	if strings.Contains(avatar, "ui-avatars.com") {
-		return c.Redirect(avatar)
-	}
-
-	// check if avatar is uploaded
-	if _, err := os.Stat(avatar); os.IsNotExist(err) {
-		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"message": "Avatar not found",
-		})
-	}
-
-	return c.SendFile(avatar)
 }

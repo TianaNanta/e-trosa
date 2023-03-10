@@ -1,4 +1,4 @@
-package controllers
+package handlers
 
 import (
 	"strconv"
@@ -14,7 +14,7 @@ func GetTrosaOwner(c *fiber.Ctx) error {
 	var trosa []models.Trosa
 	user := GetUserName(c)
 
-	database.Database.Db.Where("owner = ?", user).Find(&trosa)
+	database.DB.Where("owner = ?", user).Find(&trosa)
 	return c.JSON(trosa)
 }
 
@@ -24,7 +24,7 @@ func GetTrosaInDept(c *fiber.Ctx) error {
 	var trosa []models.Trosa
 	user := GetUserName(c)
 
-	database.Database.Db.Where("in_dept = ?", user).Find(&trosa)
+	database.DB.Where("in_dept = ?", user).Find(&trosa)
 	return c.JSON(trosa)
 }
 
@@ -37,7 +37,7 @@ func AddTrosa(c *fiber.Ctx) error {
 	}
 
 	// database
-	db := database.Database.Db
+	db := database.DB
 
 	// get username from token
 	username := GetUserName(c)
@@ -85,7 +85,7 @@ func GetMoney(c *fiber.Ctx) error {
 	var trosa []models.Trosa
 	user := GetUserName(c)
 
-	database.Database.Db.Where("owner = ?", user).Find(&trosa)
+	database.DB.Where("owner = ?", user).Find(&trosa)
 
 	// get total amount
 	var t models.Trosa
@@ -104,7 +104,7 @@ func GetDept(c *fiber.Ctx) error {
 	var trosa []models.Trosa
 	user := GetUserName(c)
 
-	database.Database.Db.Where("in_dept = ?", user).Find(&trosa)
+	database.DB.Where("in_dept = ?", user).Find(&trosa)
 
 	// get total amount
 	var t models.Trosa
@@ -123,7 +123,7 @@ func DeleteTrosa(c *fiber.Ctx) error {
 	var trosa models.Trosa
 	username := GetUserName(c)
 
-	database.Database.Db.Where("id = ?", c.Params("id")).Find(&trosa)
+	database.DB.Where("id = ?", c.Params("id")).Find(&trosa)
 
 	// check if the trosa exist
 	if trosa.ID == 0 {
@@ -140,7 +140,7 @@ func DeleteTrosa(c *fiber.Ctx) error {
 	}
 
 	// delete trosa
-	database.Database.Db.Delete(&trosa)
+	database.DB.Delete(&trosa)
 
 	return c.JSON(fiber.Map{
 		"status":  "success",
@@ -163,7 +163,7 @@ func UpdateTrosaAmount(c *fiber.Ctx) error {
 	var trosa models.Trosa
 	username := GetUserName(c)
 
-	database.Database.Db.Where("id = ?", c.Params("id")).Find(&trosa)
+	database.DB.Where("id = ?", c.Params("id")).Find(&trosa)
 
 	// check if the trosa exist
 	if trosa.ID == 0 {
@@ -180,7 +180,7 @@ func UpdateTrosaAmount(c *fiber.Ctx) error {
 	}
 
 	// update trosa amount
-	database.Database.Db.Model(&trosa).Update("amount", trosa.Amount-trosaAmount.AmountPaid)
+	database.DB.Model(&trosa).Update("amount", trosa.Amount-trosaAmount.AmountPaid)
 
 	return c.JSON(fiber.Map{
 		"status":  "success",
@@ -200,7 +200,7 @@ func GetTrosaOfTheUserID(c *fiber.Ctx) error {
 
 	// check if the user exist
 	var user models.User
-	database.Database.Db.Where("id = ?", user_id).Find(&user)
+	database.DB.Where("id = ?", user_id).Find(&user)
 	if user.ID == 0 {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"message": "User not found",
@@ -213,7 +213,7 @@ func GetTrosaOfTheUserID(c *fiber.Ctx) error {
 	// get username from user_id
 	indept := GetUsernameByID(id)
 
-	database.Database.Db.Where("owner = ? AND in_dept = ?", username, indept).Find(&trosa)
+	database.DB.Where("owner = ? AND in_dept = ?", username, indept).Find(&trosa)
 
 	// get total amount
 	var t models.Trosa
@@ -232,7 +232,7 @@ func Money(c *fiber.Ctx) error {
 	var trosa []models.Trosa
 	user := GetUserName(c)
 
-	database.Database.Db.Where("owner = ?", user).Find(&trosa)
+	database.DB.Where("owner = ?", user).Find(&trosa)
 
 	// get total amount
 	var t models.Trosa
@@ -244,7 +244,7 @@ func Money(c *fiber.Ctx) error {
 
 	// get trosa by user id
 	var trosa2 []models.Trosa
-	database.Database.Db.Where("in_dept = ?", user).Find(&trosa2)
+	database.DB.Where("in_dept = ?", user).Find(&trosa2)
 
 	// get total amount
 	var t2 models.Trosa
@@ -275,7 +275,7 @@ func Money(c *fiber.Ctx) error {
 // calculate the rest of the amount for the connected user_owner
 func GetMoneyFromUserID(c *fiber.Ctx) error {
 	// database
-	db := database.Database.Db
+	db := database.DB
 
 	// get trosa by user id
 	var trosa []models.Trosa
