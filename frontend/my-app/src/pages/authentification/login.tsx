@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { ThemeProvider } from 'styled-components';
 
-import Input from '../../../components/input/input';
-import StyledButton from '../../../components/buttons/button';
+import Input from '../../components/input/input';
+import StyledButton from '../../components/buttons/button';
 
 export default function Login() {
 
