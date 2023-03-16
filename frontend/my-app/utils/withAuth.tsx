@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AuthService } from "../services/auth-service";
@@ -6,7 +6,7 @@ import { AuthService } from "../services/auth-service";
 const withAuth = (WrappedComponent: any) => {
   const Auth = (props: any) => {
     const navigate = useNavigate();
-    const [ isloading , setIsLoading] = useState(true);
+    const [ isLoading , setIsLoading] = useState(true);
 
     useEffect(() => {
       const isLoggedIn = AuthService.isLogged();
@@ -19,7 +19,7 @@ const withAuth = (WrappedComponent: any) => {
       }
     }, []);
 
-    return isloading ? <div>Loading...</div> : <WrappedComponent {...props} />;
+    return isLoading ? <div>Loading...</div> : <WrappedComponent {...props} />;
   };
 
   return Auth;
