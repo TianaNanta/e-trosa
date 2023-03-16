@@ -42,10 +42,10 @@ declare module 'styled-components' {
             heading: string
             body: string
         }
-        themode: ThemeMode 
+        themode: ThemeMode
         img: any
     }
-    
+
     export interface invertedTheme{
         size: (value: number) => number
         typography: {
