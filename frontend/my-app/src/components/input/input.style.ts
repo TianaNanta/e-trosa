@@ -4,7 +4,7 @@ import { Box }  from "@mui/material";
 
 export const BoxStyled = styled(Box)`
     display: flex;
-    min-width: ${props => props.theme.size(5) * 12}px;
+    min-width: ${props => props.theme.size(5) * 6}px;
     font-family: ${props => props.theme.typography.heading};
 
     & .MuiInputBase-root {

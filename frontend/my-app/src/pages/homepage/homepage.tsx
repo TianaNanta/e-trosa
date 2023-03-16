@@ -4,14 +4,16 @@ import { PaddedBox } from './home.style'
 import { ThemeProvider } from 'styled-components';
 
 import Header from '../header/header';
-import Layout from '../../layout/layout';
 
 export default function Home() {
     return (
-        <Layout>
+        <>
             <PaddedBox>
-                <h1>Hello MF</h1>
+                <h1>E trosa ry vody ah</h1>
             </PaddedBox>
-        </Layout>
+            <p>
+                bobody
+            </p>
+        </>
     );
 }

@@ -3,7 +3,8 @@ import { device } from '../../display/screensize';
 
 export const PaddedBox = styled.div`
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     align-items: center;
     box-sizing: border-box;
     padding: 0px 12px;

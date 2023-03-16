@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components'
 import { ReactNode } from 'react'
 import { useState, useEffect } from 'react'
 
+import Header from '../pages/header/header'
 import GlobalStyle from '../core/theme/global'
 import LightTheme from '../core/theme/index'
 import DarkTheme from '../core/theme/theme2'
@@ -11,8 +12,7 @@ interface LayoutProps {
 }
 
 
-function Layout({ children }: LayoutProps) {
-
+function WithTheme({ children }: LayoutProps ){
   const [ isDarkMode, setIsDarkMode ] = useState<boolean>(false);
 
   const themeswitch = (isDarkMode ? DarkTheme : LightTheme );
@@ -23,19 +23,19 @@ function Layout({ children }: LayoutProps) {
   };
 
   useEffect(() => {
-    const currentTheme = JSON.parse(localStorage.getItem('isDarkmode') || 'false');
+    const currentTheme = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
     if (currentTheme) {
       setIsDarkMode(currentTheme);
     }
   }, []);
 
-
   return (
     <ThemeProvider theme={themeswitch}>
       <GlobalStyle />
+      {/* <Header mode={handleThemeToogle}/> */}
       {children}
     </ThemeProvider>
   );
 }
 
-export default Layout;
+export default WithTheme;
