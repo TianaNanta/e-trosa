@@ -11,7 +11,7 @@ export const BoxStyled = styled(Box)<IButton>`
     width: ${props => props.theme.size(2) * 26}px;
     padding: 0px ${props => props.theme.size(1) * 2}px;
 
-    
+
     & .MuiButton-root {
         color: ${props => props.theme.themode.primary};
         background-color: ${props => props.theme.themode.onPrimary};
