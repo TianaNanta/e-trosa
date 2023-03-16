@@ -1,7 +1,6 @@
 import { DefaultTheme } from "styled-components";
 import "@fontsource/roboto";
 import lightmode from "../../assets/images/lightmode.jpg";
-import "../googlematerial/colors/light.scss";
 
 const LightTheme : DefaultTheme = {
     size: (value: number, sizeMultiplicator = 4) => {

@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components'
 import { ReactNode } from 'react'
 import { useState, useEffect } from 'react'
 
+import GlobalStyle from '../core/theme/global'
 import LightTheme from '../core/theme/index'
 import DarkTheme from '../core/theme/theme2'
 
@@ -30,7 +31,8 @@ function Layout({ children }: LayoutProps) {
 
 
   return (
-    <ThemeProvider theme={LightTheme}>
+    <ThemeProvider theme={themeswitch}>
+      <GlobalStyle />
       {children}
     </ThemeProvider>
   );

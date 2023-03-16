@@ -8,7 +8,6 @@ export const BoxStyled = styled(Box)`
     font-family: ${props => props.theme.typography.heading};
 
     & .MuiInputBase-root {
-        /* background-color : red; */
         border-color: transparent;
         border-radius: ${props => props.theme.size(2)}px;
         border: solid 1px ${props => props.theme.themode.outline};
@@ -16,8 +15,6 @@ export const BoxStyled = styled(Box)`
         color: ${props => props.theme.themode.onSurfaceVariant};
 
         &:hover {
-            /* background-color: ${props => props.theme.themode.onPrimary}; */
-            /* border: none; */
         }
     };
 
