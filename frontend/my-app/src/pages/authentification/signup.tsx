@@ -1,21 +1,40 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 
-import { ThemeProvider } from 'styled-components';
+import StyledButton from '../../components/buttons/button';
+import { BackgroundLogin, CenterLogin } from './auth.style';
 
 import Input from '../../components/input/input';
-import StyledButton from '../../components/buttons/button';
+import Space from '../../components/space/space';
 
 export default function Signup() {
 
     const navigate = useNavigate();
 
-    const [identity, setIdentity] = React.useState<string>('');
+    const [user, setUser] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
 
     return (
         <>
-            <h1>bobo</h1>
+            <BackgroundLogin>
+                <CenterLogin>
+                <Input
+                    id='User'
+                    label='User'
+                    type='text'
+                    value={user}
+                    setValue={setUser}
+                    />
+                    <Space size={0} height={2}/>
+                    <Input
+                    id='Password'
+                    label='Password'
+                    type='password'
+                    value={password}
+                    setValue={setPassword}
+                    />
+                </CenterLogin>
+            </BackgroundLogin>
         </>
     );
 }

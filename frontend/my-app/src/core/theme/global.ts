@@ -6,6 +6,8 @@ const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
         font-family: ${props => props.theme.typography.body.fontFamily};
+        background-color: ${props => props.theme.colors.background};
+        color: ${props => props.theme.name === 'dark-mode' ? 'white' : 'black'};
 
         @media ${device.MobileS} {
             font-size: ${props => props.theme.size(4) + 2}px;
