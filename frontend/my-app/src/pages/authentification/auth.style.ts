@@ -42,5 +42,5 @@ export const BackgroundLogin = styled.div`
     background: -webkit-linear-gradient(81deg, #40c9ff 0%, #e81cff 100%);
     background: linear-gradient(81deg, #40c9ff 0%, #e81cff 100%);
 
-    
+
 `

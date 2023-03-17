@@ -10,7 +10,7 @@ const LightTheme : DefaultTheme = {
         heading: {
             fontFamily: 'Roboto, Sans-serif',
             fontWeight: 700,
-        }, 
+        },
         body: {
             fontFamily: 'Roboto, Sans-serif',
             fontWeight: 400,
