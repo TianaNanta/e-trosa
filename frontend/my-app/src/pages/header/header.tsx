@@ -3,6 +3,7 @@ import { HeaderStyled, GroupedBox } from './header.style';
 import Space from '../../components/space/space';
 
 
+import StyledButton from '../../components/buttons/button';
 import { Box } from '@mui/material';
 import { StyledSwitch } from '../../components/switch/switch';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
@@ -17,12 +18,14 @@ export default function Header({ mode } : IHeader) {
     <HeaderStyled>
         <GroupedBox>
             <img src={Logo} width={54}/>
-            <Space size={2} height={0}/>
+                <Space size={2} height={0}/>
             <h6>E-trosa</h6>
         </GroupedBox>
-        <Box>
-            <StyledSwitch />
-        </Box>
+        <GroupedBox>
+            <StyledButton text={'moly'} onClick={mode} color={''} />
+                <Space size={2} height={0} />
+            <StyledButton text={'moly'} onClick={mode} />
+        </GroupedBox>
     </HeaderStyled>
   );
 }
