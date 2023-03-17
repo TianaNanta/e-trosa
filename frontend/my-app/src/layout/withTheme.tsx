@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 
 import Header from '../pages/header/header'
 import GlobalStyle from '../core/theme/global'
-import LightTheme from '../core/theme/index'
-import DarkTheme from '../core/theme/theme2'
+import LightTheme from '../core/theme/light'
+import DarkTheme from '../core/theme/dark'
 
 interface LayoutProps {
   children: ReactNode;

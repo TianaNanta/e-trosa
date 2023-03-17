@@ -6,11 +6,8 @@ export const CenterLogin = styled.div`
     display: flex;
     flex-direction: column;
     padding: 2%;
-    background: rgba(255,255,255,0.2);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    background-color: ${props => props.theme.colors.surfaceVariant};
     border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.225);
 
     @media ${device.MobileS} {
         width: 90%;
@@ -38,7 +35,12 @@ export const CenterLogin = styled.div`
 export const BackgroundLogin = styled.div`
     display: grid;
     place-items: center;
-    background-image: url(${back});
+    /* background-image: url(${back}); */
     height: 100vh;
     width: 100vw;
+    background: #40c9ff;
+    background: -webkit-linear-gradient(81deg, #40c9ff 0%, #e81cff 100%);
+    background: linear-gradient(81deg, #40c9ff 0%, #e81cff 100%);
+
+    
 `

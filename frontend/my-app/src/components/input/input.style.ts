@@ -10,9 +10,9 @@ export const BoxStyled = styled(Box)`
     & .MuiInputBase-root {
         border-color: transparent;
         border-radius: ${props => props.theme.size(2)}px;
-        border: solid 1px ${props => props.theme.themode.outline};
-        background-color: ${props => props.theme.themode.surfaceVariant};
-        color: ${props => props.theme.themode.onSurfaceVariant};
+        border: solid 1px ${props => props.theme.colors.outline};
+        background-color: ${props => props.theme.colors.surfaceVariant};
+        color: ${props => props.theme.colors.OnSurfaceVariant};
 
         &:hover {
         }

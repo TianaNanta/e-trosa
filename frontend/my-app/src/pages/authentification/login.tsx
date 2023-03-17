@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { ThemeProvider } from 'styled-components';
@@ -12,8 +13,8 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    const [identity, setIdentity] = React.useState<string>('');
-    const [password, setPassword] = React.useState<string>('');
+    const [user, setUser] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     return (
         <>
@@ -23,8 +24,8 @@ export default function Login() {
                     id='User'
                     label='User'
                     type='text'
-                    value={identity}
-                    setValue={setIdentity}
+                    value={user}
+                    setValue={setUser}
                     />
                     <Space size={0} height={2}/>
                     <Input

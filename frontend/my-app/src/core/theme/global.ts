@@ -4,7 +4,8 @@ import { device } from "../../display/screensize";
 const GlobalStyle = createGlobalStyle`
 
     body {
-        font-family: ${props => props.theme.typography.body};
+        margin: 0;
+        font-family: ${props => props.theme.typography.body.fontFamily};
 
         @media ${device.MobileS} {
             font-size: ${props => props.theme.size(4) + 2}px;
@@ -30,7 +31,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-family: ${props => props.theme.typography.heading};
+        font-family: ${props => props.theme.typography.heading.fontFamily};
+        font-weight: ${props => props.theme.typography.heading.fontWeight};
     }
 
 `

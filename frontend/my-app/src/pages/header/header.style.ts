@@ -10,12 +10,12 @@ export const HeaderStyled = styled(Box)`
     top: 0;
     position: sticky;
     width: 100%;
-    background-color: ${props => props.theme.themode.background};
+    background-color: ${props => props.theme.colors.background};
     box-sizing: border-box;
     padding: 6px 12px;
 
     &  {
-        color : ${props => props.theme.themode.onBackground};
+        color : ${props => props.theme.colors.OnBackground};
     }
 
 `
