@@ -32,7 +32,7 @@ function WithTheme({ children }: LayoutProps ){
   return (
     <ThemeProvider theme={themeswitch}>
       <GlobalStyle />
-      <Header mode={handleThemeToogle}/>
+      <Header mode={handleThemeToogle} theme={themeswitch}/>
       {children}
     </ThemeProvider>
   );

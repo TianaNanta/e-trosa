@@ -9,7 +9,7 @@ export const BoxStyled = styled(Box)<IButton>`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 10px;
     width: 100%;
     background-color: ${props => props.color};
 
@@ -20,7 +20,7 @@ export const BoxStyled = styled(Box)<IButton>`
 
         @media ${device.MobileS} {
             min-width: ${props => props.theme.size(2) * 6}px;
-            font-size: ${props => props.theme.size(3) + 2}px;
+            font-size: ${props => props.theme.size(2) + 2}px;
         }
 
         @media ${device.MobileM} {

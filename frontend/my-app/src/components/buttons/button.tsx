@@ -14,7 +14,7 @@ const StyledButton: React.FC<IButton> = ({ text, color , onClick}) => {
 
     return (
             <BoxStyled color={color} onClick={onClick}>
-                <Button>
+                <Button variant="text" size="small">
                     {text}
                 </Button>
             </BoxStyled>
