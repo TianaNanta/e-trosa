@@ -11,6 +11,8 @@ export default function Signup() {
 
     const navigate = useNavigate();
 
+    const [firstname, setFirstname] = React.useState<string>('');
+    const [lastname, setLastname] = React.useState<string>('');
     const [user, setUser] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
 
@@ -18,6 +20,22 @@ export default function Signup() {
         <>
             <BackgroundLogin>
                 <CenterLogin>
+                <Input
+                    id='First Name'
+                    label='First Name'
+                    type='text'
+                    value={firstname}
+                    setValue={setFirstname}
+                    />
+                    <Space size={0} height={2}/>
+                    <Input
+                    id='Last Name'
+                    label='Last Name'
+                    type='text'
+                    value={lastname}
+                    setValue={setLastname}
+                    />
+                    <Space size={0} height={2}/>
                 <Input
                     id='User'
                     label='User'

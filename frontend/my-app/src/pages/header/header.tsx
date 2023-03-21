@@ -23,9 +23,9 @@ export default function Header({ mode, theme } : IHeader) {
   return (
     <HeaderStyled>
         <GroupedBox onClick={() => Navigate("/")}>
-            <img src={Logo} width={54}/>
+            <img src={Logo} width={54} alt="e-Trosa"/>
                 <Space size={2} height={0}/>
-            <h5>e-trosa</h5>
+            <h5>e-Trosa</h5>
         </GroupedBox>
         <GroupedBox>
             <Tooltip title="Theme Toogle" >
