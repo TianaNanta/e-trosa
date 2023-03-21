@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { ThemeProvider } from 'styled-components';
-import { BackgroundLogin, CenterLogin } from './auth.style';
+import { BackgroundLogin, ColumnBox, RowBox } from './auth.style';
 
 import Input from '../../components/input/input';
 import StyledButton from '../../components/buttons/button';
@@ -19,23 +19,23 @@ export default function Login() {
     return (
         <>
             <BackgroundLogin>
-                <CenterLogin>
-                <Input
-                    id='User'
-                    label='User'
-                    type='text'
-                    value={user}
-                    setValue={setUser}
-                    />
-                    <Space size={0} height={2}/>
+                <ColumnBox>
                     <Input
-                    id='Password'
-                    label='Password'
-                    type='password'
-                    value={password}
-                    setValue={setPassword}
-                    />
-                </CenterLogin>
+                        id='User'
+                        label='User'
+                        type='text'
+                        value={user}
+                        setValue={setUser}
+                        />
+                        <Space size={0} height={2}/>
+                        <Input
+                        id='Password'
+                        label='Password'
+                        type='password'
+                        value={password}
+                        setValue={setPassword}
+                        />
+                </ColumnBox>
             </BackgroundLogin>
         </>
     );

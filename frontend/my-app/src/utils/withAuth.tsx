@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AuthService } from "../services/auth-service";
 
 import { BoxStyled, BoxStyledChild } from './withAuth.style';
+import { Fade } from 'react-awesome-reveal';
 
 const withAuth = (WrappedComponent: any) => {
   const Auth = (props: any) => {
@@ -14,7 +15,9 @@ const withAuth = (WrappedComponent: any) => {
       const isLoggedIn = AuthService.isLogged();
 
       if (!isLoggedIn) {
-        // navigate("/auth/login");
+        setTimeout(() => {
+          navigate("/auth/login");
+        }, 1000);
       }
       else {
         setIsLoading(false);
@@ -22,6 +25,7 @@ const withAuth = (WrappedComponent: any) => {
     }, []);
 
     return isLoading ? 
+    <Fade>
       <BoxStyled>
         <BoxStyledChild />
         <BoxStyledChild />
@@ -31,6 +35,7 @@ const withAuth = (WrappedComponent: any) => {
         <BoxStyledChild />
         <BoxStyledChild />
       </BoxStyled> 
+    </Fade>
     : 
       <WrappedComponent {...props} />;
   };
