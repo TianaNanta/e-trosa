@@ -42,5 +42,5 @@ export const BackgroundLogin = styled.div`
     align-items: center;
     margin-top: 20%;
 
-    
+
 `

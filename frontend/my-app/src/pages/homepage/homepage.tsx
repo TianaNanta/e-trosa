@@ -4,7 +4,7 @@ import { PaddedBox, StyledDescription, CenterBox, FadeComponent } from './home.s
 import { ThemeProvider } from 'styled-components';
 
 export default function Home() {
-    
+
     return (
         <>
             <PaddedBox>
@@ -14,7 +14,7 @@ export default function Home() {
                 <CenterBox>
                     <FadeComponent>
                         <StyledDescription>
-                        e-Trosa app provides an easy-to-use and intuitive platform 
+                        e-Trosa app provides an easy-to-use and intuitive platform
                         that helps you manage your debts efficiently, with features such as automatic payments,
                         progress tracking, and personalized insights to guide you towards achieving your financial goals.
                         </StyledDescription>

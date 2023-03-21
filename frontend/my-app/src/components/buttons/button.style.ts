@@ -13,7 +13,7 @@ export const BoxStyled = styled(Box)<IButton>`
     width: 100%;
     background-color: ${props => props.color};
 
-    
+
     & .MuiButton-root {
         width: 100%;
         border-radius: 15px;

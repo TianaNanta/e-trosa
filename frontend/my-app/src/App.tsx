@@ -19,7 +19,7 @@ function App() {
           <Route path="/auth/*" element={ <AuthRouter/> } />
       </Routes>
     </WithTheme>
-      
+
   );
 }
 

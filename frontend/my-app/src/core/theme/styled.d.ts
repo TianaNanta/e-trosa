@@ -42,6 +42,6 @@ declare module 'styled-components' {
             outline: string
             surfaceVariant: string
             OnSurfaceVariant: string
-        } 
+        }
     }
 }
