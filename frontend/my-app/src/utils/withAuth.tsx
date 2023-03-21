@@ -24,7 +24,7 @@ const withAuth = (WrappedComponent: any) => {
       }
     }, []);
 
-    return isLoading ? 
+    return isLoading ?
     <Fade>
       <BoxStyled>
         <BoxStyledChild />
@@ -34,9 +34,9 @@ const withAuth = (WrappedComponent: any) => {
         <BoxStyledChild />
         <BoxStyledChild />
         <BoxStyledChild />
-      </BoxStyled> 
+      </BoxStyled>
     </Fade>
-    : 
+    :
       <WrappedComponent {...props} />;
   };
 

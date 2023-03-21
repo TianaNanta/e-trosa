@@ -5,7 +5,7 @@ export const BoxStyled = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);   
+    transform: translate(-50%,-50%);
     transform: rotate(45deg);
     background-color: ${props => props.theme.colors.background};
 
@@ -110,7 +110,7 @@ export const BoxStyledChild = styled.div`
     background-position: center;
     background-attachment: fixed;
     animation: square-animation 10s ease-in-out infinite both;
-    
+
 
     :nth-of-type(0) {
     animation-delay: 0s;

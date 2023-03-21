@@ -12,7 +12,7 @@ export const BoxStyled = styled(Box)`
     box-sizing: border-box;
 
     & .MuiInputBase-root {
-        height: 44px; 
+        height: 44px;
         width: 90%;
         padding: 10px;
         border-color: transparent;
