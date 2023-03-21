@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AuthService } from "../services/auth-service";
 
+import { BoxStyled, BoxStyledChild } from './withAuth.style';
+
 const withAuth = (WrappedComponent: any) => {
   const Auth = (props: any) => {
     const navigate = useNavigate();
@@ -12,14 +14,25 @@ const withAuth = (WrappedComponent: any) => {
       const isLoggedIn = AuthService.isLogged();
 
       if (!isLoggedIn) {
-        navigate("/login")
+        // navigate("/auth/login");
       }
       else {
         setIsLoading(false);
       }
     }, []);
 
-    return isLoading ? <div>Loading...</div> : <WrappedComponent {...props} />;
+    return isLoading ? 
+      <BoxStyled>
+        <BoxStyledChild />
+        <BoxStyledChild />
+        <BoxStyledChild />
+        <BoxStyledChild />
+        <BoxStyledChild />
+        <BoxStyledChild />
+        <BoxStyledChild />
+      </BoxStyled> 
+    : 
+      <WrappedComponent {...props} />;
   };
 
   return Auth;
