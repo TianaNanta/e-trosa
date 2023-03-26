@@ -22,7 +22,6 @@ export default function Header({ mode, theme }: IHeader) {
     <HeaderStyled>
       <GroupedBox onClick={() => Navigate("/")}>
         <img src={Logo} width={54} alt="e-Trosa" />
-        <Space size={2} height={0} />
         <h5>e-Trosa</h5>
       </GroupedBox>
       <GroupedBox>
@@ -31,9 +30,7 @@ export default function Header({ mode, theme }: IHeader) {
             {theme.name === "dark-mode" ? <LightModeIcon /> : <DarkModeIcon />}
           </GroupedBox>
         </Tooltip>
-        <Space size={2} height={0} />
         <StyledButton text={"login"} onClick={() => Navigate("auth/login")} />
-        <Space size={2} height={0} />
         <StyledButton
           text={"sign up"}
           onClick={() => Navigate("auth/signup")}

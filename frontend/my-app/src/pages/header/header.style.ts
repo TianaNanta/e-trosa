@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Box , Switch } from '@mui/material';
 
 export const HeaderStyled = styled(Box)`
-    height: 65px;
+    height: 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,7 +15,7 @@ export const HeaderStyled = styled(Box)`
     border-color: ${props => props.theme.colors.outline};
     border-width: 1px;
     border-style: none none solid none;
-    padding: 6px 12px;
+    padding: 0px 16px;
 
     & {
         color : ${props => props.theme.name === 'light-mode' ? 'black' : 'white'};
@@ -27,6 +27,7 @@ export const GroupedBox = styled(Box)`
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 12px;
 
     &  {
 

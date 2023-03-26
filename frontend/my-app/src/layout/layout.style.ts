@@ -1,27 +1,33 @@
-import styled from 'styled-components'
-import { device } from '../display/screensize'
+import styled from "styled-components";
+import { device } from "../display/screensize";
 
-export const FirstGrid = styled.div`
-    display: flex;
-    background-color: ${props => props.theme.colors.primaryContainer};
-    margin: 8px 1%;
-`
+export const SideMenu = styled.div`
+  background-color: ${(props) => props.theme.colors.primaryContainer};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 276px;
 
-export const SecondGrid = styled.div`
-    display: flex;
-    background-color: ${props => props.theme.colors.secondaryContainer};
-    margin: 8px 1%;
-`
+  position: absolute;
+  width: 208px;
+  left: 0px;
+  top: 48px;
+  bottom: 0px;
+`;
 
-export const BodyDiv = styled.div`
-    display: flex;
-    flex-direction: column;
+export const PageContainer = styled.div`
+  background-color: ${(props) => props.theme.colors.secondaryContainer};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
 
-    @media ${device.MobileS} {
-        flex-direction: column;
-    }
-
-    @media ${device.Laptop} {
-        flex-direction: row;
-    }
-`
+  position: absolute;
+  height: 731px;
+  left: 208px;
+  right: 0px;
+  top: 48px;
+`;
