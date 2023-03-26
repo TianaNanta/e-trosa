@@ -8,34 +8,48 @@ const GlobalStyle = createGlobalStyle`
         font-family: ${props => props.theme.typography.body.fontFamily};
         background-color: ${props => props.theme.colors.background};
         color: ${props => props.theme.name === 'dark-mode' ? 'white' : 'black'};
-
-        @media ${device.MobileS} {
-            font-size: ${props => props.theme.size(4) + 2}px;
-        }
-        @media ${device.MobileM} {
-            font-size: ${props => props.theme.size(5) + 2}px;
-        }
-        @media ${device.MobileL} {
-            font-size: ${props => props.theme.size(6) + 2}px;
-        }
-        @media ${device.Tablet} {
-            font-size: ${props => props.theme.size(7) + 2}px;
-        }
-        @media ${device.Laptop} {
-            font-size: ${props => props.theme.size(8) + 2}px;
-        }
-        @media ${device.LaptopL} {
-            font-size: ${props => props.theme.size(9) + 2}px;
-        }
-        @media ${device.Desktop} {
-            font-size: ${props => props.theme.size(10) + 2}px;
-        }
+        font-size: 14px;
+        line-height: 22px;
     }
 
     h1, h2, h3, h4, h5, h6 {
         margin: 0;
         font-family: ${props => props.theme.typography.heading.fontFamily};
-        font-weight: ${props => props.theme.typography.heading.fontWeight};
+    }
+
+    h1 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 38px;
+        line-height: 46px;
+    }
+
+    h2 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    h3 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    h4 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    h5 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
     }
 
 `
