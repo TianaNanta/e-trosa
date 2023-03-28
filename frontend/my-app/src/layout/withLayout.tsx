@@ -2,24 +2,38 @@ import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { SideMenu, PageContainer } from "./layout.style";
-
+import { SideMenu, PageContainer, RowDiv } from "./layout.style";
 
 const withLayout = (...WrappedComponent: any) => {
   const Layout = (props: any) => {
     return (
       <>
+        <RowDiv>
           <SideMenu>
             <div>
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-              <div>4</div>
-              <div>5</div>
+              <div>Dashboard</div>
+              <div>Form</div>
+              <div>List</div>
+              <div>Profile</div>
+              <div>Account</div>
             </div>
-            <div>2</div>
+            <div>
+              <h1>
+                hohoho
+              </h1>
+            </div>
           </SideMenu>
-          <PageContainer>{WrappedComponent[1]}</PageContainer>
+          <PageContainer>
+            <div>
+              <h2>
+                Dashboard Page
+              </h2>
+            </div>
+          </PageContainer>
+        </RowDiv>
+        <div>
+          footer
+        </div>
       </>
     );
   };

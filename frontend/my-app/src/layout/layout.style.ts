@@ -2,32 +2,46 @@ import styled from "styled-components";
 import { device } from "../display/screensize";
 
 export const SideMenu = styled.div`
-  background-color: ${(props) => props.theme.colors.primaryContainer};
-  display: flex;
-  flex-direction: column;
+  background-color: ${props => props.theme.name === 'light-mode' ? '#FFFFFF' : props.theme.colors.surface};
+  align-self: start;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 276px;
+  align-content: space-between;
 
-  position: absolute;
-  width: 208px;
-  left: 0px;
+  position: sticky;
+  overflow: auto;
+  height: 100vh;
   top: 48px;
-  bottom: 0px;
+  bottom: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  } ;
 `;
 
 export const PageContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.secondaryContainer};
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 24px;
+  background-color: ${(props) => props.theme.name === 'light-mode' ? '#FFFFFF' : props.theme.colors.surface};
 
-  position: absolute;
-  height: 731px;
+  width: calc(100% - 1rem);
   left: 208px;
   right: 0px;
   top: 48px;
+  margin-top: 20px;
+
+  @media (max-width: 768px) {
+    left: 0px;
+    top: 0px;
+    position: relative;
+    width: 100%;
+  } ;
 `;
+
+export const RowDiv = styled.div`
+    display: grid;
+    grid-template-columns: 272px 1fr;
+    grid-auto-rows: auto;
+    grid-gap: 1rem;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`

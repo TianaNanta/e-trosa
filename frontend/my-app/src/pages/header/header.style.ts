@@ -10,11 +10,10 @@ export const HeaderStyled = styled(Box)`
     top: 0;
     position: sticky;
     width: 100%;
-    background-color: ${props => props.theme.colors.background };
+    background-color: ${props => props.theme.colors.background};
     box-sizing: border-box;
-    border-color: ${props => props.theme.colors.outline};
-    border-width: 1px;
-    border-style: none none solid none;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.15);
+    border-color: #C4C4C4;
     padding: 0px 16px;
 
     & {

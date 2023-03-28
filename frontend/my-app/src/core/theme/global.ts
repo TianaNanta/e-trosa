@@ -6,7 +6,9 @@ const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
         font-family: ${props => props.theme.typography.body.fontFamily};
-        background-color: ${props => props.theme.colors.background};
+        /* background-color: ${props => props.theme.colors.background}; */
+        /* background-color: #F0F2F5; */
+        background-color: ${props => props.theme.name === 'light-mode' ? '#F0F2F5' : props.theme.colors.surface};
         color: ${props => props.theme.name === 'dark-mode' ? 'white' : 'black'};
         font-size: 14px;
         line-height: 22px;
