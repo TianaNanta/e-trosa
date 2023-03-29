@@ -1,9 +1,17 @@
-from pydantic import BaseModel, EmailStr
+from typing import List
+
+from fastapi_users import schemas
+
+from etrosa.web.api.trosa.schema import TrosaRead
 
 
-class UserBase(BaseModel):
-    username: str
-    email: EmailStr
-    
-class UserShow(UserBase):
-    id: int
+class UserRead(schemas.BaseUser[int]):
+    avatar: str
+    trosaown: List[TrosaRead]
+    trosadept: List[TrosaRead]
+
+class UserUpdate(schemas.BaseUserUpdate):
+    avatar: str
+
+class UserCreate(schemas.BaseUserCreate):
+    avatar: str
