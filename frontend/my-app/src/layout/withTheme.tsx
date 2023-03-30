@@ -1,6 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { ReactNode } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 
 import Header from "../pages/header/header";
 import GlobalStyle from "../core/theme/global";
@@ -11,7 +11,9 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-function WithTheme({ children }: LayoutProps) {
+export const UserThemeContext = createContext<any>({});
+
+function WithTheme({ children }: LayoutProps) : JSX.Element {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const themeswitch = isDarkMode ? DarkTheme : LightTheme;
@@ -31,11 +33,13 @@ function WithTheme({ children }: LayoutProps) {
   }, []);
 
   return (
-    <ThemeProvider theme={themeswitch}>
-      <GlobalStyle />
-      <Header mode={handleThemeToogle} theme={themeswitch} />
-      {children}
-    </ThemeProvider>
+    <UserThemeContext.Provider value={themeswitch}>
+      <ThemeProvider theme={themeswitch}>
+        <GlobalStyle />
+        <Header mode={handleThemeToogle} theme={themeswitch} />
+        {children}
+      </ThemeProvider>
+    </UserThemeContext.Provider>
   );
 }
 

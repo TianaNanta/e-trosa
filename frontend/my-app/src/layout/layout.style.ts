@@ -50,4 +50,7 @@ export const RowDiv = styled.div`
   }
 `;
 
+export const SideMenuContainer = tw(SideMenu)`
+  ${(p) => (p.$dark ? "bg-slate-800" : "bg-white")}
+`
 

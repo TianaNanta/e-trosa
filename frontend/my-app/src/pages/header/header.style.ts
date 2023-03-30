@@ -18,7 +18,7 @@ export const HeaderStyled = styled(Box)`
     padding: 0px 16px;
 
     & {
-        color : ${props => props.theme.name === 'light-mode' ? 'black' : 'white'};
+        /* color : ${props => props.theme.name === 'light-mode' ? 'black' : 'white'}; */
     }
 
 `
@@ -38,9 +38,10 @@ export const GroupedBox = styled(Box)`
 `
 
 // we are sending a props of $dark to the tailwind styled components
-// because we cannot access the props.theme.name of the styled components HOC
+// because we cannot access the props.theme.name of the styled components theme HOC
 // we can use interface to make the props type safe and required using
 // styled components regular syntax : tw.div<interface>
 export const HeaderColor = tw(HeaderStyled)`
 ${(p) => (p.$dark ? "bg-slate-800" : "bg-white")}
+
 ` 

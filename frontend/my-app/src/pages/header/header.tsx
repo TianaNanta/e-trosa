@@ -1,4 +1,6 @@
 import React from "react";
+import { useState, useEffect, createContext, useContext } from "react";
+import { UserThemeContext } from "../../layout/withTheme";
 import { HeaderStyled, GroupedBox, HeaderColor } from "./header.style";
 import Space from "../../components/space/space";
 import { useNavigate } from "react-router-dom";
@@ -15,9 +17,11 @@ interface IHeader {
   theme?: any;
 }
 
-export default function Header({ mode, theme }: IHeader) {
+export default function Header({ mode, theme }: IHeader) : JSX.Element {
   const Navigate = useNavigate();
-  let dark = theme.name === "dark-mode" ? true : false;
+  const themevalue = useContext(UserThemeContext);
+
+  let dark = themevalue.name === "dark-mode" ? true : false;
 
   return (
     <HeaderColor $dark={dark}>
