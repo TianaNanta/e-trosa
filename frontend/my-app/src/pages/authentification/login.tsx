@@ -11,7 +11,8 @@ import {
   StyledSpan,
   Divinput,
   Gridinput,
-  FullWidth
+  FullWidth,
+  TitleContainer,
 } from "./auth.style";
 
 import Input from "../../components/input/input";
@@ -32,6 +33,10 @@ export default function Login() {
     <>
       <BackgroundLogin>
         <FormDiv $dark={dark}>
+          <TitleContainer>
+            <h2>Login</h2>
+          </TitleContainer>
+          <Space size={0} height={2} />
           <Gridinput>
             <FullWidth>
               <StyledSpan>Username</StyledSpan>
@@ -46,7 +51,7 @@ export default function Login() {
               </Divinput>
             </FullWidth>
             <FullWidth>
-            <StyledSpan>Password</StyledSpan>
+              <StyledSpan>Password</StyledSpan>
               <Divinput>
                 <Input
                   id="Password"

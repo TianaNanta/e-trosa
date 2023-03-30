@@ -17,7 +17,7 @@ function App() {
     <WithTheme>
       <Routes>
         <Route path="/*" element={<Home />} />
-        <Route path="/moly/*" element={<LayoutHome />} />
+        <Route path="/dashboard/*" element={<LayoutHome />} />
         <Route path="/auth/*" element={<AuthRouter />} />
       </Routes>
     </WithTheme>

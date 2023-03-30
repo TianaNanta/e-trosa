@@ -12,6 +12,7 @@ import {
   Divinput,
   Gridinput,
   FullWidth,
+  TitleContainer,
 } from "./auth.style";
 
 import Input from "../../components/input/input";
@@ -23,6 +24,7 @@ export default function Signup() {
   const [firstname, setFirstname] = React.useState<string>("");
   const [lastname, setLastname] = React.useState<string>("");
   const [user, setUser] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [confirmPassword, setConfirmPassword] = React.useState<string>("");
 
@@ -34,6 +36,10 @@ export default function Signup() {
     <>
       <BackgroundLogin>
         <FormDiv $dark={dark}>
+          <TitleContainer>
+            <h2>Sign Up</h2>
+          </TitleContainer>
+          <Space size={0} height={5} />
           <Gridinput>
             <div>
               <StyledSpan>Firstname</StyledSpan>
@@ -66,8 +72,20 @@ export default function Signup() {
                   id="User"
                   label="User"
                   type="text"
-                  value={password}
-                  setValue={setPassword}
+                  value={user}
+                  setValue={setUser}
+                />
+              </Divinput>
+            </FullWidth>
+            <FullWidth>
+              <StyledSpan>E-mail</StyledSpan>
+              <Divinput>
+                <Input
+                  id="Email"
+                  label="Email"
+                  type="text"
+                  value={email}
+                  setValue={setEmail}
                 />
               </Divinput>
             </FullWidth>
@@ -87,8 +105,8 @@ export default function Signup() {
               <StyledSpan>Confirm Password</StyledSpan>
               <Divinput>
                 <Input
-                  id="Password"
-                  label="Password"
+                  id="Confirm Password"
+                  label="Confirm Password"
                   type="password"
                   value={confirmPassword}
                   setValue={setConfirmPassword}

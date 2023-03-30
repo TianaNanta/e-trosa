@@ -32,8 +32,12 @@ export const ColumnBox = styled.div`
 `;
 
 export const FormDiv = tw(ColumnBox)`
-  rounded-lg px-6 py-10 ring-1 ring-slate-900/5 shadow-md
+  rounded-lg px-6 py-10 ring-1 ring-slate-900/5 shadow-md 
 ${(props) => (props.$dark ? "bg-slate-800" : "white")}
+
+  h2 {
+    text-3xl font-light tracking-tight text-gray-900 sm:text-4xl
+  }
 `;
 
 export const RowBox = styled(ColumnBox)`
@@ -48,7 +52,7 @@ export const BackgroundLogin = styled.div`
 `;
 
 export const StyledSpan = tw.label`
-  block text-sm font-semibold leading-6 text-gray-900
+  block text-sm font-mono leading-6 text-gray-900
 `;
 
 export const Divinput = tw.div`
@@ -60,3 +64,7 @@ export const Gridinput = tw.div`
 export const FullWidth = tw.div`
   sm:col-span-2
 `;
+
+export const TitleContainer = tw.div`
+  mx-auto max-w-2xl text-center
+`
