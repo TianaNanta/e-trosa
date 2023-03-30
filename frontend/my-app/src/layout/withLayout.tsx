@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { SideMenu, PageContainer, RowDiv, TailContainer } from "./layout.style";
+import { SideMenu, PageContainer, RowDiv } from "./layout.style";
 
 const withLayout = (...WrappedComponent: any) => {
   const Layout = (props: any) => {
@@ -10,9 +10,6 @@ const withLayout = (...WrappedComponent: any) => {
       <>
         <RowDiv>
           <SideMenu>
-            <TailContainer>
-                <div>header</div>
-            </TailContainer>
           </SideMenu>
           <PageContainer>
             <div>

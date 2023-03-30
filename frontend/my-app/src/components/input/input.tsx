@@ -1,5 +1,5 @@
 import React from "react";
-import { BoxStyled } from "./input.style";
+import { BoxStyled, StyledInput } from "./input.style";
 import { InputBase } from "@mui/material";
 
 interface IInput {

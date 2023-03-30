@@ -1,5 +1,5 @@
 import React from "react";
-import { HeaderStyled, GroupedBox } from "./header.style";
+import { HeaderStyled, GroupedBox, HeaderColor } from "./header.style";
 import Space from "../../components/space/space";
 import { useNavigate } from "react-router-dom";
 
@@ -17,9 +17,10 @@ interface IHeader {
 
 export default function Header({ mode, theme }: IHeader) {
   const Navigate = useNavigate();
+  let dark = theme.name === "dark-mode" ? true : false;
 
   return (
-    <HeaderStyled>
+    <HeaderColor $dark={dark}>
       <GroupedBox onClick={() => Navigate("/")}>
         <img src={Logo} width={54} alt="e-Trosa" />
         <h5>e-Trosa</h5>
@@ -36,6 +37,6 @@ export default function Header({ mode, theme }: IHeader) {
           onClick={() => Navigate("auth/signup")}
         />
       </GroupedBox>
-    </HeaderStyled>
+    </HeaderColor>
   );
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { Box } from '@mui/material';
 import { IButton } from './button';
 import { device } from '../../display/screensize';

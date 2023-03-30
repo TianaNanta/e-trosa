@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import tw from 'tailwind-styled-components';
 import { Box }  from "@mui/material";
 
 
@@ -27,4 +28,8 @@ export const BoxStyled = styled(Box)`
     };
 
 
+`
+
+export const StyledInput = tw.input`
+border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500
 `
