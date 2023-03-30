@@ -2,34 +2,7 @@ import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { Box }  from "@mui/material";
 
-
-export const BoxStyled = styled(Box)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: ${props => props.theme.size(5) * 6}px;
-    max-width: 440px;
-    font-family: ${props => props.theme.typography.heading};
-    box-sizing: border-box;
-
-    & .MuiInputBase-root {
-        height: 44px; 
-        width: 90%;
-        padding: 10px;
-        border-color: transparent;
-        border-radius: ${props => props.theme.size(2)}px;
-        border: solid 1px ${props => props.theme.colors.outline};
-        background-color: transparent;
-        color: ${props => props.theme.colors.OnSurfaceVariant};
-
-        &:focus-within {
-            border: solid 2px ${props => props.theme.colors.outline};
-        }
-    };
-
-
-`
-
 export const StyledInput = tw.input`
-border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500
+block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
 `
+

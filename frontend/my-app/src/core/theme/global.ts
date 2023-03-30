@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import tw from "tailwind-styled-components";
 import { device } from "../../display/screensize";
 
 const GlobalStyle = createGlobalStyle`

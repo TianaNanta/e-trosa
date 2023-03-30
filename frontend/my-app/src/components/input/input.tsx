@@ -1,5 +1,5 @@
 import React from "react";
-import { BoxStyled, StyledInput } from "./input.style";
+import { StyledInput } from "./input.style";
 import { InputBase } from "@mui/material";
 
 interface IInput {
@@ -17,16 +17,13 @@ const Input: React.FC<IInput> = ({ id, label, type, value, setValue }) => {
       };
 
     return (
-        <BoxStyled>
-            <InputBase
-                fullWidth
+            <StyledInput
                 id={id}
                 placeholder={label}
                 type={type}
                 value={value}
                 onChange={handleChange}
             />
-        </BoxStyled>
     )
 }
 

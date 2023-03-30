@@ -4,8 +4,6 @@ import tw from "tailwind-styled-components";
 import { device } from "../display/screensize";
 
 export const SideMenu = styled.div`
-  background-color: ${(props) =>
-    props.theme.name === "light-mode" ? "#FFFFFF" : props.theme.colors.surface};
   align-self: start;
   justify-content: space-between;
   align-content: space-between;
@@ -22,9 +20,6 @@ export const SideMenu = styled.div`
 `;
 
 export const PageContainer = styled.div`
-  background-color: ${(props) =>
-    props.theme.name === "light-mode" ? "#FFFFFF" : props.theme.colors.surface};
-
   width: calc(100% - 1rem);
   left: 208px;
   right: 0px;
@@ -39,6 +34,10 @@ export const PageContainer = styled.div`
   } ;
 `;
 
+export const PageContent = tw(PageContainer)`
+  ${(props) => (props.$dark ? "bg-slate-800" : "bg-white")}
+`
+
 export const RowDiv = styled.div`
   display: grid;
   grid-template-columns: 272px 1fr;
@@ -51,6 +50,6 @@ export const RowDiv = styled.div`
 `;
 
 export const SideMenuContainer = tw(SideMenu)`
-  ${(p) => (p.$dark ? "bg-slate-800" : "bg-white")}
+  ${(props) => (props.$dark ? "bg-slate-800" : "bg-white")}
 `
 

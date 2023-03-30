@@ -1,8 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import { UserThemeContext } from "../../layout/withTheme";
 import StyledButton from "../../components/buttons/button";
-import { BackgroundLogin, ColumnBox, RowBox } from "./auth.style";
+import {
+  BackgroundLogin,
+  ColumnBox,
+  RowBox,
+  FormDiv,
+  StyledSpan,
+  Divinput,
+  Gridinput,
+  FullWidth,
+} from "./auth.style";
 
 import Input from "../../components/input/input";
 import Space from "../../components/space/space";
@@ -14,47 +24,79 @@ export default function Signup() {
   const [lastname, setLastname] = React.useState<string>("");
   const [user, setUser] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const [confirmPassword, setConfirmPassword] = React.useState<string>("");
+
+  const theme = React.useContext(UserThemeContext);
+
+  let dark = theme.name === "dark-mode" ? true : false;
 
   return (
     <>
       <BackgroundLogin>
-        <ColumnBox>
-          <RowBox>
-            <Input
-              id="First Name"
-              label="First Name"
-              type="text"
-              value={firstname}
-              setValue={setFirstname}
-            />
-            <Space size={0} height={2} />
-            <Input
-              id="Last Name"
-              label="Last Name"
-              type="text"
-              value={lastname}
-              setValue={setLastname}
-            />
-          </RowBox>
-          <Space size={0} height={5} />
-          <ColumnBox>
-            <Input
-              id="User"
-              label="User"
-              type="text"
-              value={user}
-              setValue={setUser}
-            />
-            <Space size={0} height={2} />
-            <Input
-              id="Password"
-              label="Password"
-              type="password"
-              value={password}
-              setValue={setPassword}
-            />
-          </ColumnBox>
-        </ColumnBox>
+        <FormDiv $dark={dark}>
+          <Gridinput>
+            <div>
+              <StyledSpan>Firstname</StyledSpan>
+              <Divinput>
+                <Input
+                  id="Firstname"
+                  label="Firstname"
+                  type="text"
+                  value={firstname}
+                  setValue={setFirstname}
+                />
+              </Divinput>
+            </div>
+            <div>
+              <StyledSpan>Lastname</StyledSpan>
+              <Divinput>
+                <Input
+                  id="Lastname"
+                  label="Lastname"
+                  type="text"
+                  value={lastname}
+                  setValue={setLastname}
+                />
+              </Divinput>
+            </div>
+            <FullWidth>
+              <StyledSpan>Username</StyledSpan>
+              <Divinput>
+                <Input
+                  id="User"
+                  label="User"
+                  type="text"
+                  value={password}
+                  setValue={setPassword}
+                />
+              </Divinput>
+            </FullWidth>
+            <div>
+              <StyledSpan>Password</StyledSpan>
+              <Divinput>
+                <Input
+                  id="Password"
+                  label="Password"
+                  type="password"
+                  value={password}
+                  setValue={setPassword}
+                />
+              </Divinput>
+            </div>
+            <div>
+              <StyledSpan>Confirm Password</StyledSpan>
+              <Divinput>
+                <Input
+                  id="Password"
+                  label="Password"
+                  type="password"
+                  value={confirmPassword}
+                  setValue={setConfirmPassword}
+                />
+              </Divinput>
+            </div>
+          </Gridinput>
+        </FormDiv>
       </BackgroundLogin>
     </>
   );
