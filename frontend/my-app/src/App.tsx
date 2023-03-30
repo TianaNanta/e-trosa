@@ -8,6 +8,7 @@ import WithTheme from "./layout/withTheme";
 import withAuth from "./utils/withAuth";
 import withLayout from "./layout/withLayout";
 
+
 function App() {
   const AuthHome = withAuth(<Home />);
   const LayoutHome = withLayout(<Home />, <Home />);

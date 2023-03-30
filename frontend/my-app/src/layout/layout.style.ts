@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import tw from "tailwind-styled-components"
 import { device } from "../display/screensize";
 
 export const SideMenu = styled.div`
@@ -44,4 +45,8 @@ export const RowDiv = styled.div`
   @media (max-width: 768px) {
     display: flex;
   }
+`
+
+export const TailContainer = tw.button`
+  bg-blue-500
 `
