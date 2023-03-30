@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
-import { IInputProps } from './input';
 import { Box }  from "@mui/material";
 
 
