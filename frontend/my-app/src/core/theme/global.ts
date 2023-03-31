@@ -55,6 +55,7 @@ const GlobalStyle = createGlobalStyle`
         line-height: 24px;
     }
 
+
 `
 
 export default GlobalStyle

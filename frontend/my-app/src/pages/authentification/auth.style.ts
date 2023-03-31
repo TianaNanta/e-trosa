@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import tw from "tailwind-styled-components";
-import back from "../../assets/images/back.gif";
+import tw from 'tailwind-styled-components';
 import { device } from "../../display/screensize";
 
 export const ColumnBox = styled.div`

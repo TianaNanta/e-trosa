@@ -13,7 +13,7 @@ export interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement>
 const Input: React.FC<IInputProps> = ({ id, label, type, value, setValue }) => {
 
     const themevalue = React.useContext(UserThemeContext);
-    let dark = themevalue.name === "dark-mode" ? true : false;
+    let dark = themevalue.name === "dark-mode" ? "true" : null;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);

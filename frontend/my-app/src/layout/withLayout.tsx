@@ -2,9 +2,15 @@ import React, { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 
-
 import { UserThemeContext } from "./withTheme";
-import { SideMenuContainer, PageContent, RowDiv } from "./layout.style";
+import {
+  SideMenuContainer,
+  PageContent,
+  RowDiv,
+  SideGrid,
+  StyledSideGrid,
+  StyledListComponent
+} from "./layout.style";
 
 const withLayout = (...WrappedComponent: any) => {
   const Layout = (props: any) => {
@@ -13,24 +19,59 @@ const withLayout = (...WrappedComponent: any) => {
     return (
       <>
         <RowDiv>
-          <SideMenuContainer $dark={dark}><h2>
-                1.Dashboard 
-                2.Accounts Overview Add Account Edit Account Delete
-                Account 
-                3.Transactions Overview Add Transaction Edit Transaction
-                Delete Transaction 
-                4.Budgets Overview Add Budget Edit Budget
-                Delete Budget 
-                5.Reports Overview Income Report Expense Report
-                6.Settings Profile Notifications Security Integrations 
-                7.Help &
-                Support Knowledge Base Contact Support
-              </h2></SideMenuContainer>
+          <SideMenuContainer $dark={dark}>
+            <StyledSideGrid $dark={dark}>
+              <div>
+                <h5>Dashboard</h5>
+              </div>
+              <div>
+                <h5>Accounts Overview</h5>
+                <ul>
+                  <li>Delete Account</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Transactions Overview</h5>
+                <ul>
+                  <li>Add Transaction</li>
+                  <li>Edit Transaction</li>
+                  <li>Delete Transaction</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Budgets Overview</h5>
+                <ul>
+                  <li>Add Budget</li>
+                  <li>Edit Budget</li>
+                  <li>Delete Budget</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Reports Overview</h5>
+                <ul>
+                  <li>Income Report</li>
+                  <li>Expense Report</li>
+                </ul>
+              </div>
+              <div>
+                <h5>Settings Profile</h5>
+                <ul>
+                  <li>Notifications</li>
+                  <li>Security</li>
+                  </ul>
+              </div>
+              <div>
+                <h5>Help & Support</h5>
+                <ul>
+                  <li>Knowledge Base</li>
+                  <li>Contact Support</li>
+                </ul>
+              </div>
+            </StyledSideGrid>
+          </SideMenuContainer>
           <PageContent $dark={dark}>
             <div>
-              <h2>
-                Dashboard
-              </h2>
+              <h2>Dashboard</h2>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Possimus, sit. Doloribus, alias! Temporibus suscipit velit
